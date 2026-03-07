@@ -1,23 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
+import {useTheme} from "@/context/UseTheme";
 
 export default function TabTwoScreen() {
+    const { colors } = useTheme();
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.textColor}>
+        <View style={{ backgroundColor: colors.background }}>
+            <Text style={{ color: colors.text }}>
                 Testing
             </Text>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#808080',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textColor: {
-        color: '#224455',
-    }
-});
