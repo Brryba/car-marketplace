@@ -1,9 +1,7 @@
 import {Colors} from '@/constants/theme';
 import {useColorScheme} from "react-native";
 import {createContext, ReactNode, useContext, useState} from "react";
-
-type ThemePreference = 'light' | 'dark' | 'system';
-type ResolvedTheme = 'light' | 'dark';
+import {ResolvedTheme, ThemePreference} from "@/types/global-types";
 
 interface ThemeContextType {
     theme: ThemePreference;

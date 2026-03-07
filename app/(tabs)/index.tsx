@@ -1,6 +1,6 @@
 import {ScrollView} from 'react-native';
 import {useTheme} from "@/context/UseTheme";
-import CarCard from "@/components/CarCard";
+import CarCard from "@/components/ui/CarCard";
 import {Button} from "react-native-paper";
 
 const CAR_PARAMS = [
@@ -9,7 +9,7 @@ const CAR_PARAMS = [
     { label: '0–60', value: '5.2s' },
 ];
 
-export default function TabTwoScreen() {
+export default function IndexScreen() {
     const { colors } = useTheme();
 
     return (

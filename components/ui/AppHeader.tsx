@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {IconButton} from 'react-native-paper';
-import {Stack} from "expo-router";
+import {Stack, useRouter} from "expo-router";
 import {View} from "react-native";
 import {useTheme} from "@/context/UseTheme";
 
 function AppHeader() {
     const { colors } = useTheme();
+    const router = useRouter();
 
     return (
         <Stack>
@@ -22,13 +23,31 @@ function AppHeader() {
                             <IconButton
                                 icon="cog"
                                 iconColor={colors.text}
+                                onPress={() => {router.push('/settings')}}
                             />
                             <IconButton
                                 icon="account-circle"
                                 iconColor={colors.text}
-                                onPress={() => {/* open profile */}}
                             />
                         </View>
+                    ),
+                }}
+            />
+
+            <Stack.Screen
+                name="settings"
+                options={{
+                    title: 'Настройки',
+                    headerStyle: {
+                        backgroundColor: colors.header,
+                    },
+                    headerTintColor: colors.text,
+                    headerLeft: () => (
+                        <IconButton
+                            icon="arrow-left"
+                            iconColor={colors.text}
+                            onPress={() => router.back()}
+                        />
                     ),
                 }}
             />
