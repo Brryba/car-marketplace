@@ -1,5 +1,6 @@
-import { BODY_TYPES, FUEL_TYPES, TRANSMISSIONS } from "@/types/global-types";
+
 import { z } from "zod";
+import {BODY_TYPES, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 
 const currentYear = new Date().getFullYear();
 
@@ -27,3 +28,4 @@ export const carEntitySchema = carSchema.extend({
 
 export type CarFormData = z.infer<typeof carSchema>;
 export type CarEntity = z.infer<typeof carEntitySchema>;
+export type CarFieldKey = keyof CarFormData;

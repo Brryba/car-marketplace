@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { HelperText } from 'react-native-paper';
+import {useTranslations} from "@/hooks/useTranslations";
 
 interface ControlledPickerProps {
     field: keyof CarFormData;
@@ -19,7 +20,9 @@ export default function ControlledPicker({
     field, label, value, onValueChange, items, errors, flex
 }: ControlledPickerProps) {
     const { colors } = useTheme();
+    const { tr } = useTranslations();
 
+    // @ts-ignore
     return (
         <View style={{ flex: flex || 1 }}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>{label}</Text>
@@ -33,14 +36,15 @@ export default function ControlledPicker({
                 <Picker
                     selectedValue={value}
                     onValueChange={(itemValue) => onValueChange(itemValue as string)}
-                    style={{ color: colors.text, height: 50, width: '100%', backgroundColor: 'transparent' }}
+                    style={{ color: colors.text, height: 56, width: '100%', backgroundColor: 'transparent' }}
                     dropdownIconColor={colors.text}
                     mode="dropdown"
+                    numberOfLines={100}
                 >
                     {items.map((item) => (
                         <Picker.Item
                             key={item}
-                            label={item}
+                            label={(tr[field as keyof typeof tr] as Record<string, string>)?.[item]}
                             value={item}
                             color={colors.text}
                             style={{ backgroundColor: colors.content }}
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
     pickerContainer: {
         borderWidth: 1,
         borderRadius: 4,
-        height: 52,
+        height: 56,
         justifyContent: 'center',
     },
     errorContainer: {

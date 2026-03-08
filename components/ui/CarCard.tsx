@@ -3,6 +3,8 @@ import * as React from 'react';
 import {ImageSourcePropType, ScrollView, StyleSheet, Text, View} from 'react-native';
 import { Card } from 'react-native-paper';
 import {CarEntity} from "@/schemas/car-schema";
+import {useTranslations} from "@/hooks/useTranslations";
+import {TransmissionType} from "@/types/car-types";
 
 export interface CarCardProps {
     car: CarEntity;
@@ -14,13 +16,14 @@ export default function CarCard({
                                     car, imageSource, actions
 }: CarCardProps) {
     const { colors } = useTheme();
+    const { tr } = useTranslations();
 
     const params = [
-        { label: 'Transmission', value: car.transmission },
-        { label: 'Fuel',         value: car.fuelType },
-        { label: 'Body',         value: car.bodyType },
-        { label: 'Engine',       value: car.engineSize },
-        { label: 'Color',        value: car.color }
+        { label: tr.car.transmission,   value: tr.transmission[car.transmission] },
+        { label: tr.car.fuelType,       value: tr.fuelType[car.fuelType] },
+        { label: tr.car.bodyType,       value: tr.bodyType[car.bodyType] },
+        { label: tr.car.engineSize,     value: car.engineSize },
+        { label: tr.car.color,          value: car.color }
     ];
 
     return (
@@ -33,7 +36,7 @@ export default function CarCard({
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={[styles.name, { color: colors.text }]}
                                   numberOfLines={1}>
-                                {car.make} {car.model}
+                                {car.make} {car.model} {car.releaseYear}
                             </Text>
                             <Text style={[styles.name, { color: colors.accent, fontSize: 18 }]}
                                   numberOfLines={1}>
@@ -42,7 +45,7 @@ export default function CarCard({
                         </View>
 
                         <Text style={{ fontSize: 12, fontWeight: '500', color: colors.textSecondary }}>
-                            {car.city} ● {car.releaseYear} ● {car.mileage}km
+                            {car.city}  ● {car.mileage} {tr.helpers.kms}
                         </Text>
                     </View>
 

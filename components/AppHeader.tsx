@@ -4,10 +4,12 @@ import * as React from 'react';
 import { View } from "react-native";
 import { IconButton } from 'react-native-paper';
 import {StatusBar} from "expo-status-bar";
+import {useTranslations} from "@/hooks/useTranslations";
 
 function AppHeader() {
     const { colors, activeTheme } = useTheme();
     const router = useRouter();
+    const { tr } = useTranslations();
 
     const RightHeader = () => {
         return <View style={{ flexDirection: "row" }}>
@@ -57,11 +59,11 @@ function AppHeader() {
                 headerRight: RightHeader,
                 headerLeft: LeftHeader,
             }}>
-                <Stack.Screen name="index" options={{ title: 'Автомобили', headerLeft: () => null,
+                <Stack.Screen name="index" options={{ title: tr.headers.index, headerLeft: () => null,
                     headerRight: RightHeaderWithAddButton }}/>
-                <Stack.Screen name="settings" options={{ title: 'Настройки', headerRight: () => null }} />
-                <Stack.Screen name="carCreate" options={{ title: 'Добавить машину' }} />
-                <Stack.Screen name="carChange" options={{ title: 'Изменить машину' }} />
+                <Stack.Screen name="settings" options={{ title: tr.headers.settings, headerRight: () => null }} />
+                <Stack.Screen name="carCreate" options={{ title: tr.headers.create }} />
+                <Stack.Screen name="carChange" options={{ title: tr.headers.edit }} />
             </Stack>
         </>
 

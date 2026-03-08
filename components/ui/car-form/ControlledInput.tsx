@@ -30,8 +30,8 @@ export default function ControlledInput({
             multiline={multiline}
             numberOfLines={multiline ? 4 : 1}
             style={[
-                { backgroundColor: colors.content },
-                multiline && styles.multiline
+                { backgroundColor: colors.content, height: 56 },
+                multiline && styles.multiline,
             ]}
             outlineColor={colors.border}
             activeOutlineColor={colors.accent}

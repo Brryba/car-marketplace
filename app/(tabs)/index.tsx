@@ -4,9 +4,10 @@ import { router } from "expo-router";
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button } from "react-native-paper";
 import {CarEntity} from "@/schemas/car-schema";
-import {BODY_TYPES, FUEL_TYPES, TRANSMISSIONS} from "@/types/global-types";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import {useState} from "react";
+import {BODY_TYPES, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
+import {useTranslations} from "@/hooks/useTranslations";
 
 const SAMPLE_CAR: CarEntity = {
     id: '1',
@@ -30,6 +31,7 @@ const SAMPLE_CAR: CarEntity = {
 export default function IndexScreen() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { colors } = useTheme();
+    const { tr } = useTranslations();
 
     return (
         <LoadingWrapper isLoading={isLoading}>
@@ -44,14 +46,14 @@ export default function IndexScreen() {
                                         style={[styles.button, { }]}
                                         onPress={() => router.push('/carChange')}
                                 >
-                                    Edit
+                                    {tr.buttons.edit}
                                 </Button>
                                 <Button
                                     compact
                                     mode="outlined"
                                     style={[styles.button, { }]} onPress={() => {}}
                                 >
-                                    Remove
+                                    {tr.buttons.delete}
                                 </Button>
                             </View>
                         }

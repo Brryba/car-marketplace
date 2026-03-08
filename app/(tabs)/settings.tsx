@@ -3,27 +3,29 @@ import { useTheme } from "@/context/UseTheme";
 import { LOCALE_PREFERENCES, THEME_PREFERENCES } from "@/types/global-types";
 import { ScrollView } from 'react-native';
 import { Divider } from "react-native-paper";
+import {useTranslations} from "@/hooks/useTranslations";
 
 export default function SettingsScreen() {
     const { colors } = useTheme();
     const { theme, setTheme } = useTheme();
+    const { tr } = useTranslations();
 
     return (
         <ScrollView style={{ backgroundColor: colors.background }}>
             <SettingsPicker
-                name="Theme"
+                name={tr.settings.themeLabel}
                 initialValue={theme}
                 onChange={(theme) => setTheme(theme)}
                 items={THEME_PREFERENCES.map(type =>
-                    ({ label: type.charAt(0).toUpperCase() + type.slice(1), value: type }))}
+                    ({ label: tr.settings.theme[type], value: type }))}
             />
             <Divider />
             <SettingsPicker
-                name="Language"
+                name={tr.settings.languageLabel}
                 initialValue={theme}
-                onChange={(theme) => setTheme(theme)}
+                onChange={(theme) => {}}
                 items={LOCALE_PREFERENCES.map(type =>
-                    ({ label: type.charAt(0).toUpperCase() + type.slice(1), value: type }))}
+                    ({ label: tr.settings.language[type], value: type }))}
             />
         </ScrollView>
     );
