@@ -3,9 +3,10 @@ import { Stack, useRouter } from "expo-router";
 import * as React from 'react';
 import { View } from "react-native";
 import { IconButton } from 'react-native-paper';
+import {StatusBar} from "expo-status-bar";
 
 function AppHeader() {
-    const { colors } = useTheme();
+    const { colors, activeTheme } = useTheme();
     const router = useRouter();
 
     const RightHeader = () => {
@@ -49,17 +50,21 @@ function AppHeader() {
     }
 
     return (
-        <Stack screenOptions={{
-            ...headerColors,
-            headerRight: RightHeader,
-            headerLeft: LeftHeader,
-        }}>
-            <Stack.Screen name="index" options={{ title: 'Автомобили', headerLeft: () => null,
-                headerRight: RightHeaderWithAddButton }}/>
-            <Stack.Screen name="settings" options={{ title: 'Настройки', headerRight: () => null }} />
-            <Stack.Screen name="carCreate" options={{ title: 'Добавить машину' }} />
-            <Stack.Screen name="carChange" options={{ title: 'Изменить машину' }} />
-        </Stack>
+        <>
+            <StatusBar style={activeTheme === 'dark' ? 'light' : 'dark'} />
+            <Stack screenOptions={{
+                ...headerColors,
+                headerRight: RightHeader,
+                headerLeft: LeftHeader,
+            }}>
+                <Stack.Screen name="index" options={{ title: 'Автомобили', headerLeft: () => null,
+                    headerRight: RightHeaderWithAddButton }}/>
+                <Stack.Screen name="settings" options={{ title: 'Настройки', headerRight: () => null }} />
+                <Stack.Screen name="carCreate" options={{ title: 'Добавить машину' }} />
+                <Stack.Screen name="carChange" options={{ title: 'Изменить машину' }} />
+            </Stack>
+        </>
+
     );
 }
 
