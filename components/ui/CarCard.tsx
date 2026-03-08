@@ -1,8 +1,8 @@
+import { useTheme } from "@/context/UseTheme";
+import { CarParam } from "@/types/global-types";
 import * as React from 'react';
-import {View, Text, StyleSheet, ImageSourcePropType, ScrollView} from 'react-native';
+import { ImageSourcePropType, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
-import {useTheme} from "@/context/UseTheme";
-import {CarParam} from "@/types/global-types";
 
 export interface CarCardProps {
     name: string;
@@ -17,16 +17,16 @@ export interface CarCardProps {
 }
 
 export default function CarCard({
-                                    name,
-                                    releaseYear,
-                                    mileage,
-                                    description,
-                                    params = [],
-                                    imageSource,
-                                    actions,
-                                    city,
-                                    publicationDate,
-                                }: CarCardProps) {
+    name,
+    releaseYear,
+    mileage,
+    description,
+    params = [],
+    imageSource,
+    actions,
+    city,
+    publicationDate,
+}: CarCardProps) {
     const { colors } = useTheme();
 
     return (
@@ -37,7 +37,7 @@ export default function CarCard({
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={[styles.name, { color: colors.text }]}
-                              numberOfLines={1}>
+                            numberOfLines={1}>
                             {name}
                         </Text>
 
@@ -54,7 +54,7 @@ export default function CarCard({
 
                     {params.length > 0 && (
                         <ScrollView horizontal showsHorizontalScrollIndicator={false}
-                                    contentContainerStyle={{ gap: 6, marginTop: 2 }}>
+                            contentContainerStyle={{ gap: 6, marginTop: 2 }}>
                             {params.map((p, i) => (
                                 <View key={i} style={[styles.paramPill, { backgroundColor: colors.background }]}>
                                     <Text style={{ fontSize: 12, fontWeight: '700', color: colors.text, lineHeight: 15 }}>
