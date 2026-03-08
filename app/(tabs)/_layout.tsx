@@ -1,4 +1,4 @@
-import AppHeader from "@/components/ui/AppHeader";
+import AppHeader from "@/components/AppHeader";
 import {ThemeProvider} from "@/context/UseTheme";
 
 export default function RootLayout() {

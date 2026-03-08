@@ -4,3 +4,8 @@ export type ResolvedTheme = 'light' | 'dark';
 
 export const LOCALE_PREFERENCES = ['russian', 'english'] as const;
 export type LocalePreference = typeof LOCALE_PREFERENCES[number];
+
+export interface CarParam {
+    label: string;
+    value: string;
+}
