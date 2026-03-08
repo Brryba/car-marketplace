@@ -5,6 +5,8 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button } from "react-native-paper";
 import {CarEntity} from "@/schemas/car-schema";
 import {BODY_TYPES, FUEL_TYPES, TRANSMISSIONS} from "@/types/global-types";
+import LoadingWrapper from "@/components/ui/LoadingWrapper";
+import {useState} from "react";
 
 const SAMPLE_CAR: CarEntity = {
     id: '1',
@@ -26,34 +28,37 @@ const SAMPLE_CAR: CarEntity = {
 };
 
 export default function IndexScreen() {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const { colors } = useTheme();
 
     return (
-        <View style={{ flex: 1, backgroundColor: colors.background }}>
-            <ScrollView style={{ paddingTop: 10 }}>
-                <CarCard
-                    imageSource={require('../../assets/images/malibu-1.png')}
-                    car={SAMPLE_CAR}
-                    actions={
-                        <View style={{ flexDirection: 'row', gap: 8 }}>
-                            <Button mode="elevated"
-                                    style={[styles.button, { }]}
-                                    onPress={() => router.push('/carChange')}
-                            >
-                                Edit
-                            </Button>
-                            <Button
+        <LoadingWrapper isLoading={isLoading}>
+            <View style={{ flex: 1, backgroundColor: colors.background }}>
+                <ScrollView style={{ paddingTop: 10 }}>
+                    <CarCard
+                        imageSource={require('../../assets/images/malibu-1.png')}
+                        car={SAMPLE_CAR}
+                        actions={
+                            <View style={{ flexDirection: 'row', gap: 8 }}>
+                                <Button mode="elevated"
+                                        style={[styles.button, { }]}
+                                        onPress={() => router.push('/carChange')}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
                                     compact
                                     mode="outlined"
                                     style={[styles.button, { }]} onPress={() => {}}
-                            >
-                                Remove
-                            </Button>
-                        </View>
-                    }
-                />
-            </ScrollView>
-        </View>
+                                >
+                                    Remove
+                                </Button>
+                            </View>
+                        }
+                    />
+                </ScrollView>
+            </View>
+        </LoadingWrapper>
     );
 }
 
