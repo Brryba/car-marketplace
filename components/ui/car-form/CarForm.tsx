@@ -57,7 +57,7 @@ export default function CarForm({ carFormData, actions }: CarFormProps) {
                         <ControlledInput {...bind('mileage')} field="mileage" label="Mileage (km)" keyboardType="numeric" flex={1} />
                     </View>
                     <View style={styles.row}>
-                        <ControlledInput {...bind('price')} field="price" label="Price" keyboardType="numeric" flex={1} />
+                        <ControlledInput {...bind('price')} field="price" label="Price, $" keyboardType="numeric" flex={1} />
                         <ControlledInput {...bind('city')} field="city" label="City" flex={1} />
                     </View>
                     <View style={styles.row}>
