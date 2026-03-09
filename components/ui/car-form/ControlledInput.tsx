@@ -1,5 +1,5 @@
 import { useTheme } from "@/context/UseTheme";
-import { CarFormData } from "@/schemas/car-schema";
+import { CarFormData } from "@/types/schemas/car-schema";
 import React from "react";
 import { KeyboardTypeOptions, StyleSheet, View } from "react-native";
 import { HelperText, TextInput } from "react-native-paper";

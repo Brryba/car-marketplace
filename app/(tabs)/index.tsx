@@ -2,7 +2,7 @@ import CarCard from "@/components/ui/CarCard";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import { useTheme } from "@/context/UseTheme";
 import { useTranslations } from "@/context/useTranslations";
-import { CarEntity } from "@/schemas/car-schema";
+import { CarEntity } from "@/types/schemas/car-schema";
 import { BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS } from "@/types/car-types";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -59,9 +59,3 @@ export default function IndexScreen() {
         </LoadingWrapper>
     );
 }
-
-const styles = StyleSheet.create({
-    button: {
-        width: 120,
-    }
-})

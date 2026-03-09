@@ -1,4 +1,4 @@
-import { CarFieldKey } from "@/schemas/car-schema";
+import { CarFieldKey } from "@/types/schemas/car-schema";
 import { BodyType, ColorType, FuelType, TransmissionType } from "@/types/car-types";
 import { LocalePreference, ThemePreference } from "@/types/global-types";
 

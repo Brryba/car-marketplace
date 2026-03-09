@@ -3,7 +3,7 @@ import {Image} from "expo-image";
 import {IconButton} from "react-native-paper";
 import {useTranslations} from "@/context/useTranslations";
 import {useTheme} from "@/context/UseTheme";
-import {CarFormData} from "@/schemas/car-schema";
+import {CarFormData} from "@/types/schemas/car-schema";
 import * as ImagePicker from "expo-image-picker";
 import EmptyPhoto from "@/components/ui/EmptyPhoto";
 

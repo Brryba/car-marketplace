@@ -1,5 +1,5 @@
 import { useTheme } from '@/context/UseTheme';
-import { CarFormData } from "@/schemas/car-schema";
+import { CarFormData } from "@/types/schemas/car-schema";
 import { Picker } from '@react-native-picker/picker';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';

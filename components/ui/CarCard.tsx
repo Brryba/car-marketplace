@@ -1,6 +1,6 @@
 import { useTheme } from "@/context/UseTheme";
 import { useTranslations } from "@/context/useTranslations";
-import { CarEntity } from "@/schemas/car-schema";
+import { CarEntity } from "@/types/schemas/car-schema";
 import { Image } from "expo-image";
 import * as React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
