@@ -1,5 +1,5 @@
 import CarForm from "@/components/car-form/CarForm";
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
@@ -35,6 +35,7 @@ export default function CarChange() {
                     <>
                         <Button mode="contained" style={{ backgroundColor:colors.error,
                             borderColor: colors.content }}
+                            labelStyle={{ color: colors.accentText }}
                             onPress={() => handleAsyncPress(async () => {
                                 await deleteCar(car!.id);
                                 router.push('/')

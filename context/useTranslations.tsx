@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import {LocalePreference, ResolvedTheme, ThemePreference} from "@/types/global-types";
+import {LocalePreference} from "@/types/global-types";
 import * as Localization from "expo-localization";
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {TranslationType} from "@/types/translation-type";
+import {useLocaleStorage} from "@/hooks/local-storage/useLocaleStorage";
 
 interface LocaleContextType {
     locale: LocalePreference;
@@ -13,9 +14,19 @@ interface LocaleContextType {
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
+    const { saveLocale, readLocale } = useLocaleStorage();
     const { i18n } = useTranslation();
     const tr = i18n.getResourceBundle(i18n.language, 'translation');
     const [locale, setLocale] = useState<LocalePreference>('system');
+
+    useEffect(() => {
+        const setUpLocale = async () => {
+            const stored = await readLocale();
+            if (stored) setLocale(stored as LocalePreference);
+        }
+
+        setUpLocale();
+    }, []);
 
     useEffect(() => {
         const targetLang = locale === "system"
@@ -23,10 +34,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
             : locale;
 
         i18n.changeLanguage(targetLang);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locale]);
 
-    return <LocaleContext.Provider value={{ locale, setLocale, tr }}>
+    const handleLocaleChange = (newLocale: LocalePreference) => {
+        setLocale(newLocale);
+        saveLocale(newLocale);
+    }
+
+    return <LocaleContext.Provider value={{ locale, setLocale: handleLocaleChange, tr }}>
         {children}
     </LocaleContext.Provider>
 }

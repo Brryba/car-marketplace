@@ -2,7 +2,7 @@ import {StyleSheet, View} from "react-native";
 import {Image} from "expo-image";
 import {IconButton} from "react-native-paper";
 import {useTranslations} from "@/context/useTranslations";
-import {useTheme} from "@/context/UseTheme";
+import {useTheme} from "@/context/useTheme";
 import {CarFormData} from "@/types/schemas/car-schema";
 import * as ImagePicker from "expo-image-picker";
 import EmptyPhoto from "@/components/ui/EmptyPhoto";

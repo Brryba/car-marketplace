@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { CarFormData } from "@/types/schemas/car-schema";
 import React from "react";
 import { KeyboardTypeOptions, StyleSheet, View } from "react-native";

@@ -1,6 +1,6 @@
 import {View} from "react-native";
 import {ActivityIndicator, MD2Colors} from "react-native-paper";
-import {useTheme} from "@/context/UseTheme";
+import {useTheme} from "@/context/useTheme";
 
 interface LoadingWrapperProps {
     isLoading: boolean;

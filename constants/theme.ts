@@ -20,6 +20,6 @@ export const Colors = {
     accent: '#4D8EFF',
     accentText: '#FFFFFF',
     border: '#2C2C3A',
-    error: '#CF6679',
+    error: '#b8384b',
   },
 };

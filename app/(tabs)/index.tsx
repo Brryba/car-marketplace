@@ -1,6 +1,6 @@
 import CarCard from "@/components/ui/CarCard";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { useTranslations } from "@/context/useTranslations";
 import { CarEntity } from "@/types/schemas/car-schema";
 import {useEffect, useState} from "react";

@@ -1,4 +1,4 @@
-import { useTheme } from '@/context/UseTheme';
+import { useTheme } from '@/context/useTheme';
 import { CarFormData } from "@/types/schemas/car-schema";
 import { Picker } from '@react-native-picker/picker';
 import React from 'react';

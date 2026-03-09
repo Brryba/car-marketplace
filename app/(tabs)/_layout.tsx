@@ -1,5 +1,5 @@
 import AppHeader from "@/components/AppHeader";
-import { ThemeProvider } from "@/context/UseTheme";
+import { ThemeProvider } from "@/context/useTheme";
 import '@/locales/i18n';
 import {LocaleProvider} from "@/context/useTranslations";
 

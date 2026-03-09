@@ -1,6 +1,6 @@
 import {Text, View} from "react-native";
 import {Picker} from "@react-native-picker/picker";
-import {useTheme} from "@/context/UseTheme";
+import {useTheme} from "@/context/useTheme";
 
 interface ItemProps {
     label: string;

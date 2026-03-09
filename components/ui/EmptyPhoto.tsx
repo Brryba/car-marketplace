@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import {IconButton} from "react-native-paper";
 import {Text, TouchableOpacity} from "react-native";
-import {useTheme} from "@/context/UseTheme";
+import {useTheme} from "@/context/useTheme";
 import {useTranslations} from "@/context/useTranslations";
 
 interface EmptyPhotoProps {

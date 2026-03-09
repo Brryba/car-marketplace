@@ -1,5 +1,5 @@
 import { SettingsPicker } from "@/components/ui/SettingsPicker";
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { LOCALE_PREFERENCES, THEME_PREFERENCES } from "@/types/global-types";
 import { ScrollView } from 'react-native';
 import { Divider } from "react-native-paper";

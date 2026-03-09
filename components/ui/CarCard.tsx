@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { useTranslations } from "@/context/useTranslations";
 import { CarEntity } from "@/types/schemas/car-schema";
 import { Image } from "expo-image";

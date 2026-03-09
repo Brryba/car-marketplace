@@ -1,6 +1,6 @@
 import ControlledInput from "@/components/car-form/ControlledInput";
 import ControlledPicker from "@/components/car-form/ControlledPicker";
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import {CarEntity, CarFormData, carSchema} from "@/types/schemas/car-schema";
 import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 import React, { useEffect } from 'react';

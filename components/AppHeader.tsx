@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { Stack, useRouter } from "expo-router";
 import * as React from 'react';
 import { View } from "react-native";

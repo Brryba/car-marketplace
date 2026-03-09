@@ -1,5 +1,5 @@
 import CarForm from "@/components/car-form/CarForm";
-import { useTheme } from "@/context/UseTheme";
+import { useTheme } from "@/context/useTheme";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 import {useTranslations} from "@/context/useTranslations";
