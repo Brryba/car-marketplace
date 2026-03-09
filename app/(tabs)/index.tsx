@@ -1,13 +1,12 @@
 import CarCard from "@/components/ui/CarCard";
+import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import { useTheme } from "@/context/UseTheme";
-import { router } from "expo-router";
+import { useTranslations } from "@/context/useTranslations";
+import { CarEntity } from "@/schemas/car-schema";
+import { BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS } from "@/types/car-types";
+import { useState } from "react";
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button } from "react-native-paper";
-import {CarEntity} from "@/schemas/car-schema";
-import LoadingWrapper from "@/components/ui/LoadingWrapper";
-import {useState} from "react";
-import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
-import {useTranslations} from "@/hooks/useTranslations";
 
 const SAMPLE_CAR: CarEntity = {
     id: '1',
@@ -26,6 +25,7 @@ const SAMPLE_CAR: CarEntity = {
     color: COLORS[0],
     bodyType: BODY_TYPES[0],
     vin: '1HGBH41JXMN109186',
+    photo: "file:///data/user/0/host.exp.exponent/cache/ImagePicker/9d12b4d2-21d8-4310-9723-ff917c32ef81.jpeg"
 };
 
 export default function IndexScreen() {
@@ -38,13 +38,12 @@ export default function IndexScreen() {
             <View style={{ flex: 1, backgroundColor: colors.background }}>
                 <ScrollView style={{ paddingTop: 10 }}>
                     <CarCard
-                        imageSource={require('../../assets/images/malibu-1.png')}
                         car={SAMPLE_CAR}
                         actions={
                             <View style={{ flexDirection: 'row', gap: 8 }}>
                                 <Button mode="outlined"
-                                        textColor={colors.accent}
-                                        style={{ borderColor: colors.accent }}>
+                                    textColor={colors.accent}
+                                    style={{ borderColor: colors.accent }}>
                                     {tr.buttons.edit}
                                 </Button>
                                 <Button mode="outlined" style={{

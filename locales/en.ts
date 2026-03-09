@@ -35,6 +35,7 @@ const en: TranslationType = {
     bodyType: "Body Type",
     vin: "VIN Number",
     description: "Description",
+    photo: "Photo"
   },
   transmission: {
     Manual: 'Manual',

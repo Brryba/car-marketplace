@@ -1,6 +1,6 @@
 
+import { BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS } from "@/types/car-types";
 import { z } from "zod";
-import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 
 const currentYear = new Date().getFullYear();
 
@@ -18,6 +18,7 @@ export const carSchema = z.object({
     color: z.enum(COLORS),
     bodyType: z.enum(BODY_TYPES),
     vin: z.string().min(1, 'Required'),
+    photo: z.string().optional(),
 });
 
 export const carEntitySchema = carSchema.extend({

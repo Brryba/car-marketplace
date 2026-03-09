@@ -18,13 +18,13 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     const [locale, setLocale] = useState<LocalePreference>('system');
 
     useEffect(() => {
-            const targetLang = locale === "system"
-                ? (Localization.getLocales()[0]?.languageCode ?? 'en')
-                : locale;
+        const targetLang = locale === "system"
+            ? (Localization.getLocales()[0]?.languageCode ?? 'en')
+            : locale;
 
-            i18n.changeLanguage(targetLang);
+        i18n.changeLanguage(targetLang);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [locale]);
+    }, [locale]);
 
     return <LocaleContext.Provider value={{ locale, setLocale, tr }}>
         {children}

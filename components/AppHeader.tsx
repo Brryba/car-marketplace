@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View } from "react-native";
 import { IconButton } from 'react-native-paper';
 import {StatusBar} from "expo-status-bar";
-import {useTranslations} from "@/hooks/useTranslations";
+import {useTranslations} from "@/context/useTranslations";
 
 function AppHeader() {
     const { colors, activeTheme } = useTheme();

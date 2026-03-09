@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { HelperText } from 'react-native-paper';
-import {useTranslations} from "@/hooks/useTranslations";
+import {useTranslations} from "@/context/useTranslations";
 
 interface ControlledPickerProps {
     field: keyof CarFormData;

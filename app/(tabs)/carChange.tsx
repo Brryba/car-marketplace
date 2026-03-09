@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Button } from "react-native-paper";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import {useState} from "react";
-import {useTranslations} from "@/hooks/useTranslations";
+import {useTranslations} from "@/context/useTranslations";
 
 export default function CarChange() {
     const [isLoading, setIsLoading] = useState<boolean>(false);

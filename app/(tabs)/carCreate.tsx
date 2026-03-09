@@ -2,7 +2,7 @@ import CarForm from "@/components/ui/car-form/CarForm";
 import { useTheme } from "@/context/UseTheme";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
-import {useTranslations} from "@/hooks/useTranslations";
+import {useTranslations} from "@/context/useTranslations";
 
 export default function CarChangeScreen() {
     const { colors } = useTheme();

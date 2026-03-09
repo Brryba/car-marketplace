@@ -9,16 +9,3 @@ export type BodyType = typeof BODY_TYPES[number];
 
 export const COLORS = ['Black', 'White', 'Silver', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Brown', 'Beige'] as const;
 export type ColorType = typeof COLORS[number];
-
-export enum CarColor {
-    Black = 'Black',
-    White = 'White',
-    Silver = 'Silver',
-    Grey = 'Grey',
-    Red = 'Red',
-    Blue = 'Blue',
-    Green = 'Green',
-    Yellow = 'Yellow',
-    Brown = 'Brown',
-    Beige = 'Beige'
-}

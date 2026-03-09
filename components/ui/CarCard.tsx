@@ -1,44 +1,49 @@
 import { useTheme } from "@/context/UseTheme";
+import { useTranslations } from "@/context/useTranslations";
+import { CarEntity } from "@/schemas/car-schema";
+import { Image } from "expo-image";
 import * as React from 'react';
-import {ImageSourcePropType, ScrollView, StyleSheet, Text, View} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
-import {CarEntity} from "@/schemas/car-schema";
-import {useTranslations} from "@/hooks/useTranslations";
+import EmptyPhoto from "@/components/ui/EmptyPhoto";
 
 export interface CarCardProps {
     car: CarEntity;
-    imageSource?: ImageSourcePropType;
     actions?: React.ReactNode;
 }
 
 export default function CarCard({
-                                    car, imageSource, actions
+    car, actions
 }: CarCardProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
 
     const params = [
-        { label: tr.car.transmission,   value: tr.transmission[car.transmission] },
-        { label: tr.car.fuelType,       value: tr.fuelType[car.fuelType] },
-        { label: tr.car.bodyType,       value: tr.bodyType[car.bodyType] },
-        { label: tr.car.engineSize,     value: car.engineSize },
-        { label: tr.car.color,          value: tr.color[car.color] }
+        { label: tr.car.transmission, value: tr.transmission[car.transmission] },
+        { label: tr.car.fuelType, value: tr.fuelType[car.fuelType] },
+        { label: tr.car.bodyType, value: tr.bodyType[car.bodyType] },
+        { label: tr.car.engineSize, value: car.engineSize },
+        { label: tr.car.color, value: tr.color[car.color] }
     ];
 
     return (
         <Card style={[styles.card, { backgroundColor: colors.content }]} elevation={2}>
             <View>
-                <Card.Cover source={imageSource} />
+                {car.photo ? (
+                    <Image source={{ uri: car.photo }} style={{ width: '100%', aspectRatio: 16 / 9 }} />
+                ) : (
+                    <EmptyPhoto/>
+                )}
 
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={[styles.name, { color: colors.text }]}
-                                  numberOfLines={1}>
+                                numberOfLines={1}>
                                 {car.make} {car.model} {car.releaseYear}
                             </Text>
                             <Text style={[styles.name, { color: colors.accent, fontSize: 18 }]}
-                                  numberOfLines={1}>
+                                numberOfLines={1}>
                                 {car.price} $
                             </Text>
                         </View>
@@ -55,7 +60,7 @@ export default function CarCard({
                     ) : null}
 
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}
-                                contentContainerStyle={{ gap: 6, marginTop: 5, marginBottom: 10 }}>
+                        contentContainerStyle={{ gap: 6, marginTop: 5, marginBottom: 10 }}>
                         {params.map((p, i) => (
                             <View key={i} style={[styles.paramPill, { backgroundColor: colors.background }]}>
                                 <Text style={{ fontSize: 12, fontWeight: '700', color: colors.text, lineHeight: 15 }}>

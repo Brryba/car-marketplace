@@ -34,7 +34,8 @@ const ru: TranslationType = {
     color: "Цвет",
     bodyType: "Тип Кузова",
     vin: "VIN Код",
-    description: "Описание"
+    description: "Описание",
+    photo: "Фото"
   },
   transmission: {
     Manual: 'Механика',
