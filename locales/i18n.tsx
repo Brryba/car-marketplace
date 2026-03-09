@@ -15,6 +15,6 @@ const systemLang = Localization.getLocales()[0]?.languageCode ?? 'en';
 i18n.use(initReactI18next)
     .init({
         resources,
-        lng: 'ru',
+        lng: systemLang,
         fallbackLng: 'en'
     });

@@ -8,7 +8,7 @@ import {useTranslations} from "@/hooks/useTranslations";
 export default function SettingsScreen() {
     const { colors } = useTheme();
     const { theme, setTheme } = useTheme();
-    const { tr } = useTranslations();
+    const { tr, locale, setLocale } = useTranslations();
 
     return (
         <ScrollView style={{ backgroundColor: colors.background }}>
@@ -22,8 +22,10 @@ export default function SettingsScreen() {
             <Divider />
             <SettingsPicker
                 name={tr.settings.languageLabel}
-                initialValue={theme}
-                onChange={(theme) => {}}
+                initialValue={locale}
+                onChange={(locale) => {
+                    setLocale(locale)}
+                }
                 items={LOCALE_PREFERENCES.map(type =>
                     ({ label: tr.settings.language[type], value: type }))}
             />

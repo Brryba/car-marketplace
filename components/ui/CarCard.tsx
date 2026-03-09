@@ -4,7 +4,6 @@ import {ImageSourcePropType, ScrollView, StyleSheet, Text, View} from 'react-nat
 import { Card } from 'react-native-paper';
 import {CarEntity} from "@/schemas/car-schema";
 import {useTranslations} from "@/hooks/useTranslations";
-import {TransmissionType} from "@/types/car-types";
 
 export interface CarCardProps {
     car: CarEntity;
@@ -23,7 +22,7 @@ export default function CarCard({
         { label: tr.car.fuelType,       value: tr.fuelType[car.fuelType] },
         { label: tr.car.bodyType,       value: tr.bodyType[car.bodyType] },
         { label: tr.car.engineSize,     value: car.engineSize },
-        { label: tr.car.color,          value: car.color }
+        { label: tr.car.color,          value: tr.color[car.color] }
     ];
 
     return (

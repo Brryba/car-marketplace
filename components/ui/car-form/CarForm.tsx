@@ -15,7 +15,7 @@ export interface CarFormProps {
 const INITIAL_DATA: CarFormData = {
     make: '', model: '', releaseYear: 0, mileage: 0, price: 0,
     city: '', description: '', transmission: TRANSMISSIONS[0], fuelType: FUEL_TYPES[0],
-    engineSize: '', color: '', bodyType: BODY_TYPES[0], vin: ''
+    engineSize: '', color: COLORS[0], bodyType: BODY_TYPES[0], vin: ''
 };
 
 export default function CarForm({ carFormData, actions }: CarFormProps) {
@@ -53,7 +53,7 @@ export default function CarForm({ carFormData, actions }: CarFormProps) {
                 style={{ backgroundColor: colors.background, flex: 1 }}
                 keyboardShouldPersistTaps="handled"
             >
-                <View style={{ flex: 1, gap: 12 }}>
+                <View style={{ flex: 1, gap: 5 }}>
 
                     <View style={styles.row}>
                         <ControlledInput {...bind('releaseYear')} field="releaseYear" label={tr.car.releaseYear} keyboardType="numeric" flex={1} />

@@ -1,6 +1,6 @@
 
 import { z } from "zod";
-import {BODY_TYPES, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
+import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 
 const currentYear = new Date().getFullYear();
 
@@ -15,7 +15,7 @@ export const carSchema = z.object({
     transmission: z.enum(TRANSMISSIONS),
     fuelType: z.enum(FUEL_TYPES),
     engineSize: z.string().min(1, 'Required'),
-    color: z.string().min(1, 'Required'),
+    color: z.enum(COLORS),
     bodyType: z.enum(BODY_TYPES),
     vin: z.string().min(1, 'Required'),
 });
