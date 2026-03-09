@@ -1,10 +1,10 @@
-import {CarEntity, CarFormData} from "@/types/schemas/car-schema";
+import { asyncStorageProvider } from "@/db/local/car-storage";
+import { CarEntity, CarFormData } from "@/types/schemas/car-schema";
 import uuid from "react-native-uuid";
-import {storage} from "@/db/local/car-storage";
 
 export const carRepository = {
     async saveCar(car: CarFormData) {
-        const id = uuid.v4();
+        const id = uuid.v4().toString();
         const createdAt = Date.now().toString();
         const ownerId = "1";
 
@@ -15,14 +15,24 @@ export const carRepository = {
             ownerId,
         };
 
-        await storage.set("car:" + id, JSON.stringify(carEntity));
+        await asyncStorageProvider.set("car:" + id, carEntity);
+    },
+
+    async getCar(id: string): Promise<CarEntity | null> {
+        return await asyncStorageProvider.get("car:" + id);
+    },
+
+    async getAllCars(): Promise<CarEntity[]> {
+        const keys = await asyncStorageProvider.keys("car:");
+        const cars = await Promise.all(keys.map(key => asyncStorageProvider.get(key)));
+        return cars.filter(Boolean)
     },
 
     async editCar(id: string, car: CarEntity) {
-        await storage.set("car:" + id, JSON.stringify(car));
+        await asyncStorageProvider.set("car:" + id, car);
     },
 
     async deleteCar(id: string) {
-        await storage.remove("car:" + id);
+        await asyncStorageProvider.remove("car:" + id);
     }
 };

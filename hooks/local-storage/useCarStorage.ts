@@ -1,5 +1,6 @@
 import {CarEntity, CarFormData} from "@/types/schemas/car-schema";
 import {carRepository} from "@/db/local/car-repository";
+import uuid from "react-native-uuid";
 
 export function useCarStorage() {
     const saveCar = async (car: CarFormData) => {
@@ -14,5 +15,13 @@ export function useCarStorage() {
         await carRepository.deleteCar(uuid)
     }
 
-    return { saveCar, editCar, deleteCar };
+    const getCar = async (uuid: string) => {
+        return await carRepository.getCar(uuid);
+    }
+
+    const getAllCars = async () => {
+        return await carRepository.getAllCars();
+    }
+
+    return { saveCar, editCar, deleteCar, getCar, getAllCars };
 }
