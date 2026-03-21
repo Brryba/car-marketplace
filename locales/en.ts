@@ -24,7 +24,7 @@ const en: TranslationType = {
   car: {
     releaseYear: "Release Year",
     mileage: "Mileage, km",
-    price: "Price",
+    price: "Price, $",
     city: "City",
     make: "Make",
     model: "Model",
@@ -82,6 +82,14 @@ const en: TranslationType = {
     delete: 'Remove',
     save: 'Save',
     cancel: 'Cancel'
+  },
+  errors: {
+    required: 'Field is required',
+    invalidYear: 'Year is invalid',
+    positive: 'Number must be positive',
+    errorLabel: 'Error',
+    default: 'Something went wrong',
+    number: 'Invalid number format'
   }
 };
 

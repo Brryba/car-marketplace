@@ -30,4 +30,12 @@ export interface TranslationType {
         cancel: string;
         save: string;
     }
+    errors: {
+        required: string;
+        invalidYear: string;
+        positive: string;
+        errorLabel: string;
+        default: string;
+        number: string;
+    }
 }

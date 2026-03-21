@@ -41,6 +41,7 @@ function AppHeader() {
             icon="arrow-left"
             iconColor={colors.text}
             onPress={() => router.back()}
+            style={{ marginLeft: 0, marginRight: 15 }}
         />
     }
 
@@ -58,6 +59,7 @@ function AppHeader() {
                 ...headerColors,
                 headerRight: RightHeader,
                 headerLeft: LeftHeader,
+                headerBackVisible: false,
             }}>
                 <Stack.Screen name="index" options={{ title: tr.headers.index, headerLeft: () => null,
                     headerRight: RightHeaderWithAddButton }}/>

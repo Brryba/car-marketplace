@@ -1,7 +1,7 @@
 import ControlledInput from "@/components/car-form/ControlledInput";
 import ControlledPicker from "@/components/car-form/ControlledPicker";
 import { useTheme } from "@/context/useTheme";
-import {CarEntity, CarFormData, carSchema} from "@/types/schemas/car-schema";
+import {CarEntity, CarFormData, useCarSchema} from "@/types/schemas/car-schema";
 import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 import React, { useEffect } from 'react';
 import {KeyboardAvoidingView,  ScrollView, StyleSheet, View} from 'react-native';
@@ -20,15 +20,16 @@ export interface CarFormProps {
 }
 
 const INITIAL_DATA: CarFormData = {
-    make: 'a', model: 'b', releaseYear: 2026, mileage: 0, price: 0,
-    city: 'c', description: 'd', transmission: TRANSMISSIONS[0], fuelType: FUEL_TYPES[0],
-    engineSize: 'e', color: COLORS[0], bodyType: BODY_TYPES[0], vin: 'g', photo: ''
+    make: '', model: '', releaseYear: 2026, mileage: 0, price: 0,
+    city: '', description: '', transmission: TRANSMISSIONS[0], fuelType: FUEL_TYPES[0],
+    engineSize: '', color: COLORS[0], bodyType: BODY_TYPES[0], vin: '', photo: ''
 };
 
 export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormProps) {
     const [formData, setFormData] = React.useState<CarFormData>(INITIAL_DATA);
     const [errors, setErrors] = React.useState<Partial<Record<keyof CarFormData, string>>>({});
     const { colors } = useTheme();
+    const { carSchema } = useCarSchema();
     const { handleAsyncPress } = useAsyncPress();
 
     const { tr } = useTranslations();
@@ -60,7 +61,7 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
             return;
         }
 
-        await handleAsyncPress(onSubmit, formData);
+        await handleAsyncPress(onSubmit, result.data);
     };
 
     const bind = (field: keyof CarFormData) => ({

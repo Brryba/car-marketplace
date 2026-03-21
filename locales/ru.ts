@@ -24,7 +24,7 @@ const ru: TranslationType = {
   car: {
     releaseYear: "Год выпуска",
     mileage: "Пробег, км",
-    price: "Цена",
+    price: "Цена, $",
     city: "Город",
     make: "Производитель",
     model: "Модель",
@@ -82,6 +82,14 @@ const ru: TranslationType = {
     edit: 'Изменить',
     delete: 'Удалить',
     cancel: 'Отмена'
+  },
+  errors: {
+    required: 'Поле обязательно',
+    invalidYear: 'Неверный год',
+    positive: 'Число не положительное',
+    errorLabel: 'Ошибка',
+    default: 'Что-то пошло не так',
+    number: 'Неверный формат числа'
   }
 };
 
