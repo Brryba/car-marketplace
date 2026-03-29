@@ -12,6 +12,7 @@ export interface TranslationType {
     settings: {
         themeLabel: string;
         languageLabel: string;
+        clearCache: string;
         theme: Record<ThemePreference, string>;
         language: Record<LocalePreference, string>;
     };

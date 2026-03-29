@@ -19,7 +19,8 @@ const ru: TranslationType = {
       ru: "Русский",
       en: "Английский",
       system: "Системный"
-    }
+    },
+    clearCache: 'Очистить кеш'
   },
   car: {
     releaseYear: "Год выпуска",
