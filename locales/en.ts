@@ -89,7 +89,8 @@ const en: TranslationType = {
     positive: 'Number must be positive',
     errorLabel: 'Error',
     default: 'Something went wrong',
-    number: 'Invalid number format'
+    number: 'Invalid number format',
+    loadFailed: 'Server error. Please try again later'
   }
 };
 

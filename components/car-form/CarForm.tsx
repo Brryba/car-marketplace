@@ -4,11 +4,13 @@ import { useTheme } from "@/context/useTheme";
 import {CarEntity, CarFormData, useCarSchema} from "@/types/schemas/car-schema";
 import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
 import React, { useEffect } from 'react';
-import {KeyboardAvoidingView,  ScrollView, StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useTranslations} from "@/context/useTranslations";
 import ImageSelector from "@/components/car-form/ImageSelector";
 import {Button} from "react-native-paper";
 import {useAsyncPress} from "@/hooks/useAsyncPress";
+import {useCarMakes} from "@/hooks/api/useCarMakes";
+import LoadingWrapper from "@/components/ui/LoadingWrapper";
 
 export type Mode = "create" | "edit";
 
@@ -31,6 +33,7 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
     const { colors } = useTheme();
     const { carSchema } = useCarSchema();
     const { handleAsyncPress } = useAsyncPress();
+    const { data: cars, isLoading, isError, error } = useCarMakes();
 
     const { tr } = useTranslations();
 
@@ -71,87 +74,104 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
         errors: errors,
     });
 
+    if (isError) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
+                <Text style={{ color: colors.error }}>{tr.errors.loadFailed}</Text>
+            </View>
+        );
+    }
+
     return (
-        <KeyboardAvoidingView style={{ flex: 1 }}>
-            <ScrollView
-                contentContainerStyle={{ padding: 16, flexGrow: 1 }}
-                style={{ backgroundColor: colors.background, flex: 1 }}
-                keyboardShouldPersistTaps="handled"
-            >
-                <ImageSelector
-                    formData={formData}
-                    handleChange={(uri: string) => handleChange("photo", uri)}
-                />
-                <View style={{ flex: 1, gap: 12 }}>
+        <LoadingWrapper isLoading={isLoading}>
+            <KeyboardAvoidingView style={{ flex: 1 }}>
+                <ScrollView
+                    contentContainerStyle={{ padding: 16, flexGrow: 1 }}
+                    style={{ backgroundColor: colors.background, flex: 1 }}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <ImageSelector
+                        formData={formData}
+                        handleChange={(uri: string) => handleChange("photo", uri)}
+                    />
+                    <View style={{ flex: 1, gap: 12 }}>
 
-                    <View style={styles.row}>
-                        <ControlledInput {...bind('releaseYear')} field="releaseYear" label={tr.car.releaseYear} keyboardType="numeric" flex={1} />
-                        <ControlledInput {...bind('mileage')} field="mileage" label={tr.car.mileage} keyboardType="numeric" flex={1} />
-                    </View>
-                    <View style={styles.row}>
-                        <ControlledInput {...bind('price')} field="price" label={tr.car.price} keyboardType="numeric" flex={1} />
-                        <ControlledInput {...bind('city')} field="city" label={tr.car.city} flex={1} />
-                    </View>
-                    <View style={styles.row}>
-                        <ControlledInput {...bind('make')} field="make" label={tr.car.make} flex={1} />
-                        <ControlledInput {...bind('model')} field="model" label={tr.car.model} flex={1} />
-                    </View>
-                    <View style={styles.row}>
-                        <ControlledPicker
-                            {...bind('transmission')}
-                            field="transmission"
-                            label={tr.car.transmission}
-                            onValueChange={(val) => handleChange('transmission', val)}
-                            items={TRANSMISSIONS}
-                            flex={1}
-                        />
-                        <ControlledPicker
-                            {...bind('fuelType')}
-                            field="fuelType"
-                            label={tr.car.fuelType}
-                            onValueChange={(val) => handleChange('fuelType', val)}
-                            items={FUEL_TYPES}
-                            flex={1}
-                        />
-                    </View>
-                    <View style={styles.row}>
-                        <ControlledInput {...bind('engineSize')} field="engineSize" label={tr.car.engineSize} flex={1} />
-                        <ControlledPicker
-                            {...bind('color')}
-                            field="color"
-                            label={tr.car.color}
-                            onValueChange={(val) => handleChange('color', val)}
-                            items={COLORS}
-                            flex={1}
-                        />
-                    </View>
-                    <View style={styles.row}>
-                        <ControlledPicker
-                            {...bind('bodyType')}
-                            field="bodyType"
-                            label={tr.car.bodyType}
-                            onValueChange={(val) => handleChange('bodyType', val)}
-                            items={BODY_TYPES}
-                            flex={1}
-                        />
-                        <ControlledInput {...bind('vin')} field="vin" label={tr.car.vin} flex={1} />
-                    </View>
+                        <View style={styles.row}>
+                            <ControlledInput {...bind('releaseYear')} field="releaseYear" label={tr.car.releaseYear} keyboardType="numeric" flex={1} />
+                            <ControlledInput {...bind('mileage')} field="mileage" label={tr.car.mileage} keyboardType="numeric" flex={1} />
+                        </View>
+                        <View style={styles.row}>
+                            <ControlledInput {...bind('price')} field="price" label={tr.car.price} keyboardType="numeric" flex={1} />
+                            <ControlledInput {...bind('city')} field="city" label={tr.car.city} flex={1} />
+                        </View>
+                        <View style={styles.row}>
+                            <ControlledPicker
+                                {...bind('make')}
+                                field="make"
+                                label={tr.car.make}
+                                onValueChange={(val) => handleChange('make', val)}
+                                items={cars ?? []}
+                                flex={1}
+                            />
+                            <ControlledInput {...bind('model')} field="model" label={tr.car.model} flex={1} />
+                        </View>
+                        <View style={styles.row}>
+                            <ControlledPicker
+                                {...bind('transmission')}
+                                field="transmission"
+                                label={tr.car.transmission}
+                                onValueChange={(val) => handleChange('transmission', val)}
+                                items={TRANSMISSIONS}
+                                flex={1}
+                            />
+                            <ControlledPicker
+                                {...bind('fuelType')}
+                                field="fuelType"
+                                label={tr.car.fuelType}
+                                onValueChange={(val) => handleChange('fuelType', val)}
+                                items={FUEL_TYPES}
+                                flex={1}
+                            />
+                        </View>
+                        <View style={styles.row}>
+                            <ControlledInput {...bind('engineSize')} field="engineSize" label={tr.car.engineSize} flex={1} />
+                            <ControlledPicker
+                                {...bind('color')}
+                                field="color"
+                                label={tr.car.color}
+                                onValueChange={(val) => handleChange('color', val)}
+                                items={COLORS}
+                                flex={1}
+                            />
+                        </View>
+                        <View style={styles.row}>
+                            <ControlledPicker
+                                {...bind('bodyType')}
+                                field="bodyType"
+                                label={tr.car.bodyType}
+                                onValueChange={(val) => handleChange('bodyType', val)}
+                                items={BODY_TYPES}
+                                flex={1}
+                            />
+                            <ControlledInput {...bind('vin')} field="vin" label={tr.car.vin} flex={1} />
+                        </View>
 
-                    <ControlledInput {...bind('description')} field="description" label={tr.car.description} multiline flex={1} />
+                        <ControlledInput {...bind('description')} field="description" label={tr.car.description} multiline flex={1} />
 
-                    <View style={{ marginTop: 'auto', paddingTop: 16, gap: 12 }}>
-                        <Button mode="contained"
-                                style={{ backgroundColor: colors.accent }}
-                                labelStyle={{ color: colors.accentText }}
-                                onPress={handleSubmit}>
-                            {mode === "create" ? tr.buttons.create : tr.buttons.save}
-                        </Button>
-                        {actions}
+                        <View style={{ marginTop: 'auto', paddingTop: 16, gap: 12 }}>
+                            <Button mode="contained"
+                                    style={{ backgroundColor: colors.accent }}
+                                    labelStyle={{ color: colors.accentText }}
+                                    onPress={handleSubmit}>
+                                {mode === "create" ? tr.buttons.create : tr.buttons.save}
+                            </Button>
+                            {actions}
+                        </View>
+
                     </View>
-
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </LoadingWrapper>
     );
 }
 

@@ -44,7 +44,7 @@ export default function ControlledPicker({
                     {items.map((item) => (
                         <Picker.Item
                             key={item}
-                            label={(tr[field as keyof typeof tr] as Record<string, string>)?.[item]}
+                            label={(tr[field as keyof typeof tr] as Record<string, string>)?.[item] ?? item}
                             value={item}
                             color={colors.text}
                             style={{ backgroundColor: colors.content }}

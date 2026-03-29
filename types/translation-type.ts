@@ -37,5 +37,6 @@ export interface TranslationType {
         errorLabel: string;
         default: string;
         number: string;
+        loadFailed: string;
     }
 }
