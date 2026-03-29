@@ -1,4 +1,4 @@
-import { asyncStorageProvider } from "@/db/local/car-storage";
+import { asyncStorageProvider } from "@/db/local/async-storage-provider";
 import { CarEntity, CarFormData } from "@/types/schemas/car-schema";
 import uuid from "react-native-uuid";
 

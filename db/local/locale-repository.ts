@@ -1,4 +1,4 @@
-import { asyncStorageProvider } from "@/db/local/car-storage";
+import { asyncStorageProvider } from "@/db/local/async-storage-provider";
 import {LocalePreference} from "@/types/global-types";
 
 export const localeRepository = {
