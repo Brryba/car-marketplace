@@ -3,3 +3,9 @@ export interface CarMakeResponse {
         name: string;
     }[]
 }
+
+export interface CarModelResponse {
+    data: {
+        name: string;
+    }[]
+}

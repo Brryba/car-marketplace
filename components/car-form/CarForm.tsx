@@ -1,9 +1,9 @@
 import ControlledInput from "@/components/car-form/ControlledInput";
 import ControlledPicker from "@/components/car-form/ControlledPicker";
-import { useTheme } from "@/context/useTheme";
+import {useTheme} from "@/context/useTheme";
 import {CarEntity, CarFormData, useCarSchema} from "@/types/schemas/car-schema";
 import {BODY_TYPES, COLORS, FUEL_TYPES, TRANSMISSIONS} from "@/types/car-types";
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {KeyboardAvoidingView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useTranslations} from "@/context/useTranslations";
 import ImageSelector from "@/components/car-form/ImageSelector";
@@ -11,6 +11,7 @@ import {Button} from "react-native-paper";
 import {useAsyncPress} from "@/hooks/useAsyncPress";
 import {useCarMakes} from "@/hooks/api/useCarMakes";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
+import {useCarModels} from "@/hooks/api/useCarModels";
 
 export type Mode = "create" | "edit";
 
@@ -33,7 +34,8 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
     const { colors } = useTheme();
     const { carSchema } = useCarSchema();
     const { handleAsyncPress } = useAsyncPress();
-    const { data: cars, isLoading, isError, error } = useCarMakes();
+    const {data: makes, isLoading: makesLoading, isError: makesError} = useCarMakes();
+    const {data: models, isLoading: modelsLoading, isError: modelsError} = useCarModels(formData.make);
 
     const { tr } = useTranslations();
 
@@ -74,7 +76,7 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
         errors: errors,
     });
 
-    if (isError) {
+    if (makesError || modelsError) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
                 <Text style={{ color: colors.error }}>{tr.errors.loadFailed}</Text>
@@ -83,7 +85,7 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
     }
 
     return (
-        <LoadingWrapper isLoading={isLoading}>
+        <LoadingWrapper isLoading={makesLoading || modelsLoading}>
             <KeyboardAvoidingView style={{ flex: 1 }}>
                 <ScrollView
                     contentContainerStyle={{ padding: 16, flexGrow: 1 }}
@@ -109,11 +111,17 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
                                 {...bind('make')}
                                 field="make"
                                 label={tr.car.make}
-                                onValueChange={(val) => handleChange('make', val)}
-                                items={cars ?? []}
-                                flex={1}
+                                onValueChange={(val) => handleChange('make', val) }
+                                items={makes ?? []}
                             />
-                            <ControlledInput {...bind('model')} field="model" label={tr.car.model} flex={1} />
+                            <ControlledPicker
+                                {...bind('model')}
+                                field="model"
+                                label={tr.car.model}
+                                onValueChange={(val) => handleChange('model', val)}
+                                items={models ?? []}
+                                enabled={formData.make !== ''}
+                            />
                         </View>
                         <View style={styles.row}>
                             <ControlledPicker
@@ -122,7 +130,6 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
                                 label={tr.car.transmission}
                                 onValueChange={(val) => handleChange('transmission', val)}
                                 items={TRANSMISSIONS}
-                                flex={1}
                             />
                             <ControlledPicker
                                 {...bind('fuelType')}
@@ -130,7 +137,6 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
                                 label={tr.car.fuelType}
                                 onValueChange={(val) => handleChange('fuelType', val)}
                                 items={FUEL_TYPES}
-                                flex={1}
                             />
                         </View>
                         <View style={styles.row}>
@@ -141,7 +147,6 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
                                 label={tr.car.color}
                                 onValueChange={(val) => handleChange('color', val)}
                                 items={COLORS}
-                                flex={1}
                             />
                         </View>
                         <View style={styles.row}>
@@ -151,7 +156,6 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
                                 label={tr.car.bodyType}
                                 onValueChange={(val) => handleChange('bodyType', val)}
                                 items={BODY_TYPES}
-                                flex={1}
                             />
                             <ControlledInput {...bind('vin')} field="vin" label={tr.car.vin} flex={1} />
                         </View>

@@ -27,7 +27,7 @@ export default function CarCard({
     ];
 
     return (
-        <Card style={[styles.card, { backgroundColor: colors.content }]} elevation={2}>
+        <Card style={[styles.card, { backgroundColor: colors.content, marginBottom: 20 }]} elevation={2}>
             <View>
                 {car.photo ? (
                     <Image source={{ uri: car.photo }} style={{ width: '100%', aspectRatio: 16 / 9 }} />

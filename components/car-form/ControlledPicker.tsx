@@ -13,18 +13,17 @@ interface ControlledPickerProps {
     onValueChange: (value: string) => void;
     items: readonly string[];
     errors: Partial<Record<keyof CarFormData, string>>;
-    flex?: number;
+    enabled?: boolean;
 }
 
 export default function ControlledPicker({
-    field, label, value, onValueChange, items, errors, flex
+    field, label, value, onValueChange, items, errors, enabled = true
 }: ControlledPickerProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
 
-    // @ts-ignore
     return (
-        <View style={{ flex: flex || 1 }}>
+        <View style={{ flex: 1 }}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>{label}</Text>
             <View style={[
                 styles.pickerContainer,
@@ -40,6 +39,7 @@ export default function ControlledPicker({
                     dropdownIconColor={colors.text}
                     mode="dropdown"
                     numberOfLines={100}
+                    enabled={enabled}
                 >
                     {items.map((item) => (
                         <Picker.Item
