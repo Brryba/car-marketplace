@@ -91,7 +91,8 @@ const en: TranslationType = {
     errorLabel: 'Error',
     default: 'Something went wrong',
     number: 'Invalid number format',
-    loadFailed: 'Server error. Please try again later'
+    loadFailed: 'Loading error. Please try again later',
+    noInternet: 'No internet connection',
   }
 };
 

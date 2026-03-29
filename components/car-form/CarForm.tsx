@@ -79,7 +79,7 @@ export default function CarForm({ carEntity, actions, mode, onSubmit }: CarFormP
     if (makesError || modelsError) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
-                <Text style={{ color: colors.error }}>{tr.errors.loadFailed}</Text>
+                <Text style={{ color: colors.error, textAlign: 'center' }}>{tr.errors.loadFailed}</Text>
             </View>
         );
     }

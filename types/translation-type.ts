@@ -39,5 +39,6 @@ export interface TranslationType {
         default: string;
         number: string;
         loadFailed: string;
+        noInternet: string;
     }
 }

@@ -75,7 +75,14 @@ export default function CarCard({
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         {car.createdAt ? (
-                            <Text style={{ fontSize: 11, color: colors.textSecondary }}>{car.createdAt}</Text>
+                            <View>
+                                <Text style={{ fontSize: 13, color: colors.textSecondary }}>
+                                    {new Date(Number(car.createdAt)).toLocaleDateString()}
+                                </Text>
+                                <Text style={{ fontSize: 13, color: colors.textSecondary }}>{
+                                    new Date(Number(car.createdAt)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+                                </Text>
+                            </View>
                         ) : null}
                         {actions ? (
                             <View style={styles.actions}>{actions}</View>
