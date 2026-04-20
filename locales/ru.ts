@@ -22,6 +22,31 @@ const ru: TranslationType = {
     },
     clearCache: 'Очистить кеш'
   },
+  filter: {
+    labels: {
+      make: 'Производитель',
+      model: 'Модель',
+      releaseYear: 'Год выпуска',
+      from: 'От',
+      to: 'До',
+      city: 'Город',
+      enterCity: 'Введите город',
+      sortingLabel: 'Сортировать',
+      anyMake: 'Любой',
+      anyModel: 'Любая'
+    },
+    sorting: {
+      noSorting: 'По умолчанию',
+      mileageAsc: 'Пробег ↑',
+      mileageDesc: 'Пробег ↓',
+      releaseYearAsc: 'Год выпуска ↑',
+      releaseYearDesc: 'Год выпуска ↓'
+    },
+    buttons: {
+      clear: 'Очистить',
+      submit: 'Применить'
+    }
+  },
   car: {
     releaseYear: "Год выпуска",
     mileage: "Пробег, км",

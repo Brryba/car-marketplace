@@ -9,6 +9,9 @@ import { Button } from "react-native-paper";
 import {useCarStorage} from "@/hooks/local-storage/useCarStorage";
 import {useAsyncPress} from "@/hooks/useAsyncPress";
 import {useRouter} from "expo-router";
+import ParamsButton from "@/components/ui/ParamsButton";
+import {useFilterPanel} from "@/hooks/useFilterPanel";
+import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
 
 
 export default function IndexScreen() {
@@ -17,6 +20,7 @@ export default function IndexScreen() {
     const { tr } = useTranslations();
     const { deleteCar, getAllCars } = useCarStorage();
     const { handleAsyncPress } = useAsyncPress();
+    const { isOpen: isFilterOpen, toggle } = useFilterPanel();
     const router = useRouter();
     const [cars, setCars] = useState<CarEntity[]>([]);
 
@@ -30,6 +34,7 @@ export default function IndexScreen() {
     return (
         <LoadingWrapper isLoading={isLoading}>
             <View style={{ flex: 1, backgroundColor: colors.background }}>
+                <CarFilterComponent isOpen={isFilterOpen} onSubmitClick={(filters) => {toggle(); console.log(filters)}}/>
                 <ScrollView style={{ paddingTop: 10 }}>
                     {cars.map(car => (
                         <CarCard
@@ -61,6 +66,7 @@ export default function IndexScreen() {
                         />
                     ))}
                 </ScrollView>
+                <ParamsButton onPress={toggle}/>
             </View>
         </LoadingWrapper>
     );

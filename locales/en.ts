@@ -22,6 +22,31 @@ const en: TranslationType = {
     },
     clearCache: 'Clear cache'
   },
+  filter: {
+    labels: {
+      make: 'Make',
+      model: 'Model',
+      releaseYear: 'Release Year',
+      from: 'From',
+      to: 'To',
+      city: 'City',
+      enterCity: 'Enter city name...',
+      sortingLabel: 'Sort by',
+      anyMake: 'Any',
+      anyModel: 'Any'
+    },
+    sorting: {
+      noSorting: 'Default',
+      mileageAsc: 'Mileage ↑',
+      mileageDesc: 'Mileage ↓',
+      releaseYearAsc: 'Release Year ↑',
+      releaseYearDesc: 'Release Year ↓'
+    },
+    buttons: {
+      clear: 'Clear',
+      submit: 'Apply'
+    }
+  },
   car: {
     releaseYear: "Release Year",
     mileage: "Mileage, km",

@@ -16,6 +16,31 @@ export interface TranslationType {
         theme: Record<ThemePreference, string>;
         language: Record<LocalePreference, string>;
     };
+    filter: {
+        labels: {
+            make: string;
+            model: string;
+            releaseYear: string;
+            from: string;
+            to: string;
+            anyMake: string;
+            anyModel: string;
+            city: string;
+            enterCity: string;
+            sortingLabel: string;
+        }
+        sorting: {
+            noSorting: string;
+            mileageAsc: string;
+            mileageDesc: string;
+            releaseYearAsc: string;
+            releaseYearDesc: string;
+        }
+        buttons: {
+            clear: string;
+            submit: string;
+        }
+    }
     car: Record<CarFieldKey, string>,
     transmission: Record<TransmissionType, string>,
     fuelType: Record<FuelType, string>,
