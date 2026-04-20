@@ -9,6 +9,7 @@ import {useLocalSearchParams, useRouter} from "expo-router";
 import {useCarStorage} from "@/hooks/local-storage/useCarStorage";
 import {CarEntity} from "@/types/schemas/car-schema";
 import {useAsyncPress} from "@/hooks/useAsyncPress";
+import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 
 export default function CarChange() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export default function CarChange() {
     const { handleAsyncPress } = useAsyncPress();
 
     const { id } = useLocalSearchParams<{ id: string }>();
-    const { getCar, editCar, deleteCar } = useCarStorage();
+    const { getCar, editCar, deleteCar } = useCarStorage(firebaseCarRepository);
     const [car, setCar] = useState<CarEntity | null>(null);
 
     useEffect(() => {

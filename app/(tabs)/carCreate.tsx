@@ -5,11 +5,12 @@ import { Button } from "react-native-paper";
 import {useTranslations} from "@/context/useTranslations";
 import {useCarStorage} from "@/hooks/local-storage/useCarStorage";
 import {useRouter} from "expo-router";
+import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 
 export default function CarCreateScreen() {
     const { colors } = useTheme();
     const { tr } = useTranslations();
-    const { saveCar } = useCarStorage();
+    const { saveCar } = useCarStorage(firebaseCarRepository);
     const router = useRouter();
 
     return <View style={{ flex: 1, backgroundColor: colors.background }}>

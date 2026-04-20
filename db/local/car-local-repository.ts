@@ -1,8 +1,9 @@
 import { asyncStorageProvider } from "@/db/local/async-storage-provider";
 import { CarEntity, CarFormData } from "@/types/schemas/car-schema";
 import uuid from "react-native-uuid";
+import {ICarRepository} from "@/db/car-repository.interface";
 
-export const carRepository = {
+export const carLocalRepository: ICarRepository = {
     async saveCar(car: CarFormData) {
         const id = uuid.v4().toString();
         const createdAt = Date.now().toString();

@@ -1,5 +1,5 @@
 import {CarEntity, CarFormData} from "@/types/schemas/car-schema";
-import {carRepository} from "@/db/local/car-repository";
+import {carLocalRepository} from "@/db/local/car-local-repository";
 import uuid from "react-native-uuid";
 import {themeRepository} from "@/db/local/theme-repository";
 import {ThemePreference} from "@/types/global-types";

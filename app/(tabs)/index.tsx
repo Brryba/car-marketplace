@@ -12,13 +12,14 @@ import {useRouter} from "expo-router";
 import ParamsButton from "@/components/ui/ParamsButton";
 import {useFilterPanel} from "@/hooks/useFilterPanel";
 import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
+import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 
 
 export default function IndexScreen() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { colors } = useTheme();
     const { tr } = useTranslations();
-    const { deleteCar, getAllCars } = useCarStorage();
+    const { deleteCar, getAllCars } = useCarStorage(firebaseCarRepository);
     const { handleAsyncPress } = useAsyncPress();
     const { isOpen: isFilterOpen, toggle } = useFilterPanel();
     const router = useRouter();
