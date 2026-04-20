@@ -1,45 +1,47 @@
 import {
     collection,
+    deleteDoc,
     doc,
     getDoc,
     getDocs,
+    orderBy,
+    query,
+    Query,
     setDoc,
     updateDoc,
-    deleteDoc,
-    where,
-    query,
-    orderBy,
-    Query
+    where
 } from 'firebase/firestore';
 import uuid from "react-native-uuid";
-import { CarEntity, CarFormData } from '@/types/schemas/car-schema';
-import { ICarRepository } from '@/db/car-repository.interface';
+import {CarEntity, CarFormData} from '@/types/schemas/car-schema';
+import {ICarRepository} from '@/db/car-repository.interface';
 import {db} from "@/db/firebase/fireBaseConfig";
 import {CarFilters} from "@/types/car-filters";
 import Fuse from "fuse.js";
+import {uploadPhotoToCloudinary} from "@/api/cloudinary.api";
 
 const COLLECTION = 'cars';
 
 export const firebaseCarRepository: ICarRepository = {
     async saveCar(car: CarFormData): Promise<void> {
-        try {
-            const id = uuid.v4() as string;
-            console.log('[Firebase] saveCar started', { car, id });
+        const id = uuid.v4() as string;
 
-            const ref = doc(collection(db, COLLECTION), id);
-            console.log('[Firebase] ref created', ref.path);
-
-            await setDoc(ref, { ...car, id, createdAt: Date.now() });
-            console.log('[Firebase] saveCar success', id);
-        } catch (e) {
-            console.error('[Firebase] saveCar error', e);
-            throw e;
+        let photoUrl = '';
+        if (car.photo) {
+            photoUrl = await uploadPhotoToCloudinary(car.photo);
         }
+
+        const ref = doc(collection(db, COLLECTION), id);
+        await setDoc(ref, { ...car, photo: photoUrl, id, createdAt: Date.now() });
     },
 
     async editCar(id: string, car: CarEntity): Promise<void> {
+        let photoUrl = '';
+        if (car.photo) {
+            photoUrl = await uploadPhotoToCloudinary(car.photo);
+        }
+
         const ref = doc(db, COLLECTION, id);
-        await updateDoc(ref, { ...car });
+        await updateDoc(ref, { ...car, photo: photoUrl });
     },
 
     async deleteCar(id: string): Promise<void> {

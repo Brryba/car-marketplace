@@ -6,10 +6,11 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import { useTheme } from '@/context/useTheme';
 import {CarFilters, SortDirection, SortTypes} from "@/types/car-filters";
-import { useTranslations } from "@/context/useTranslations";
+import {useTranslations} from "@/context/useTranslations";
 import {useCarMakes} from "@/hooks/api/useCarMakes";
 import {useCarModels} from "@/hooks/api/useCarModels";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
+import {Colors} from "@/constants/theme";
 
 export const EMPTY_FILTERS: CarFilters = {
     make: undefined,
@@ -208,7 +209,7 @@ export default function CarFilterComponent({ isOpen, onSubmitClick, initialFilte
                             <Text style={s.resetText}>{tr.filter.buttons.clear}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[s.saveBtn, { backgroundColor: colors.accent }]} onPress={handleSave}>
-                            <Text style={s.saveText}>{tr.filter.buttons.submit}</Text>
+                            <Text style={[s.saveText, {color: colors.content}]}>{tr.filter.buttons.submit}</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -218,7 +219,7 @@ export default function CarFilterComponent({ isOpen, onSubmitClick, initialFilte
     );
 }
 
-const styles = (colors: any) => StyleSheet.create({
+const styles = (colors: typeof Colors['light']) => StyleSheet.create({
     container: {
         backgroundColor: colors.content,
         borderBottomWidth: 1,
@@ -287,7 +288,6 @@ const styles = (colors: any) => StyleSheet.create({
     },
     saveText: {
         fontSize: 14,
-        color: '#fff',
         fontWeight: '600',
     },
 });

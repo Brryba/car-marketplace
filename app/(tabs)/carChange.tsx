@@ -1,7 +1,7 @@
 import CarForm from "@/components/car-form/CarForm";
-import { useTheme } from "@/context/useTheme";
-import { View } from "react-native";
-import { Button } from "react-native-paper";
+import {useTheme} from "@/context/useTheme";
+import {View} from "react-native";
+import {Button} from "react-native-paper";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import {useEffect, useState} from "react";
 import {useTranslations} from "@/context/useTranslations";
@@ -56,7 +56,8 @@ export default function CarChange() {
                 }
              mode="edit"
             onSubmit={async (data) => {
-                await editCar(id, { ...car!, ...data });
+                setIsLoading(true);
+                await editCar(id, {...car!, ...data});
                 router.push('/');
             }}
              carEntity={car}
