@@ -1,4 +1,4 @@
-export type SortTypes = 'mileage' | 'year' | null;
+export type SortTypes = 'mileage' | 'releaseYear' | null;
 export type SortDirection = 'asc' | 'desc';
 
 export interface CarFilters {

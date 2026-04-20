@@ -13,12 +13,13 @@ import ParamsButton from "@/components/ui/ParamsButton";
 import {useFilterPanel} from "@/hooks/useFilterPanel";
 import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
-
+import {CarFilters} from "@/types/car-filters";
 
 export default function IndexScreen() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { colors } = useTheme();
     const { tr } = useTranslations();
+    const [ filters, setFilters ] = useState<CarFilters>();
     const { deleteCar, getAllCars } = useCarStorage(firebaseCarRepository);
     const { handleAsyncPress } = useAsyncPress();
     const { isOpen: isFilterOpen, toggle } = useFilterPanel();
@@ -27,15 +28,19 @@ export default function IndexScreen() {
 
     useEffect(() => {
         setIsLoading(true);
-        getAllCars()
+        getAllCars(filters)
             .then(setCars)
             .finally(() => setIsLoading(false));
-    }, []);
+    }, [filters]);
+
+    const handleSubmitClick = (filters: CarFilters) => {
+        setFilters(filters);
+    }
 
     return (
         <LoadingWrapper isLoading={isLoading}>
             <View style={{ flex: 1, backgroundColor: colors.background }}>
-                <CarFilterComponent isOpen={isFilterOpen} onSubmitClick={(filters) => {toggle(); console.log(filters)}}/>
+                <CarFilterComponent isOpen={isFilterOpen} onSubmitClick={handleSubmitClick} initialFilters={filters}/>
                 <ScrollView style={{ paddingTop: 10 }}>
                     {cars.map(car => (
                         <CarCard

@@ -6,12 +6,17 @@ import {
     setDoc,
     updateDoc,
     deleteDoc,
+    where,
+    query,
+    orderBy,
+    Query
 } from 'firebase/firestore';
 import uuid from "react-native-uuid";
 import { CarEntity, CarFormData } from '@/types/schemas/car-schema';
 import { ICarRepository } from '@/db/car-repository.interface';
 import {db} from "@/db/firebase/fireBaseConfig";
 import {CarFilters} from "@/types/car-filters";
+import Fuse from "fuse.js";
 
 const COLLECTION = 'cars';
 
@@ -50,7 +55,41 @@ export const firebaseCarRepository: ICarRepository = {
     },
 
     async getAllCars(filters?: CarFilters): Promise<CarEntity[]> {
-        const snap = await getDocs(collection(db, COLLECTION));
-        return snap.docs.map(d => d.data() as CarEntity);
+        if (!filters) {
+            const snap = await getDocs(collection(db, COLLECTION));
+            return snap.docs.map(d => d.data() as CarEntity);
+        }
+
+        let q: Query = collection(db, COLLECTION);
+
+        if (filters.make) {
+            q = query(q, where('make', '==', filters.make));
+
+            if (filters.model) {
+                q = query(q, where('model', '==', filters.model));
+            }
+        }
+        if (filters.yearFrom) {
+            q = query(q, where('releaseYear', '>=', filters.yearFrom));
+        }
+        if (filters.yearTo) {
+            q = query(q, where('releaseYear', '<=', filters.yearTo));
+        }
+        if (filters.sortBy) {
+            q = query(q, orderBy(filters.sortBy, filters.sortOrder ?? 'asc'));
+        }
+
+        const snapshot = await getDocs(q);
+        let cars = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as CarEntity));
+
+        if (filters.city) {
+            const fuse = new Fuse(cars, {
+                keys: ['city'],
+                threshold: 0.25,
+            });
+            cars = fuse.search(filters.city).map(r => r.item);
+        }
+
+        return cars;
     },
 };

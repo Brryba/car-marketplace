@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useTheme } from '@/context/useTheme';
-import { CarFilters } from "@/types/car-filters";
+import {CarFilters, SortDirection, SortTypes} from "@/types/car-filters";
 import { useTranslations } from "@/context/useTranslations";
 import {useCarMakes} from "@/hooks/api/useCarMakes";
 import {useCarModels} from "@/hooks/api/useCarModels";
@@ -21,25 +21,32 @@ export const EMPTY_FILTERS: CarFilters = {
     sortOrder: undefined,
 };
 
-interface Props {
+interface CarFilterComponentProps {
     isOpen: boolean;
     onSubmitClick: (filters: CarFilters) => void;
+    initialFilters?: CarFilters;
 }
 
-export default function CarFilterComponent({ isOpen, onSubmitClick }: Props) {
+interface SortOption {
+    label: string;
+    sortBy: SortTypes;
+    sortOrder: SortDirection;
+}
+
+export default function CarFilterComponent({ isOpen, onSubmitClick, initialFilters }: CarFilterComponentProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
-    const [filters, setFilters] = useState<CarFilters>(EMPTY_FILTERS);
+    const [filters, setFilters] = useState<CarFilters>(initialFilters ?? EMPTY_FILTERS);
     const {data: makes, isLoading: makesLoading, isError: makesError} = useCarMakes();
     const {data: models, isLoading: modelsLoading, isError: modelsError} = useCarModels(filters.make);
 
-    const SORT_OPTIONS = [
-        { label: tr.filter.sorting.noSorting,       sortBy: null,      sortOrder: 'asc'  },
-        { label: tr.filter.sorting.mileageAsc,      sortBy: 'mileage', sortOrder: 'asc'  },
-        { label: tr.filter.sorting.mileageDesc,     sortBy: 'mileage', sortOrder: 'desc' },
-        { label: tr.filter.sorting.releaseYearAsc,  sortBy: 'year',    sortOrder: 'asc'  },
-        { label: tr.filter.sorting.releaseYearDesc, sortBy: 'year',    sortOrder: 'desc' },
-    ] as const;
+    const SORT_OPTIONS: SortOption[] = [
+        { label: tr.filter.sorting.noSorting,       sortBy: null,              sortOrder: 'asc'  },
+        { label: tr.filter.sorting.mileageAsc,      sortBy: 'mileage',         sortOrder: 'asc'  },
+        { label: tr.filter.sorting.mileageDesc,     sortBy: 'mileage',         sortOrder: 'desc' },
+        { label: tr.filter.sorting.releaseYearAsc,  sortBy: 'releaseYear',     sortOrder: 'asc'  },
+        { label: tr.filter.sorting.releaseYearDesc, sortBy: 'releaseYear',     sortOrder: 'desc' },
+    ];
 
     const handleChange = (field: keyof CarFilters, value: CarFilters[keyof CarFilters]) => {
         setFilters(prev => ({
