@@ -13,13 +13,14 @@ import ParamsButton from "@/components/ui/ParamsButton";
 import {useFilterPanel} from "@/hooks/useFilterPanel";
 import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
-import {CarFilters} from "@/types/car-filters";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store/store";
 
 export default function IndexScreen() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { colors } = useTheme();
     const { tr } = useTranslations();
-    const [ filters, setFilters ] = useState<CarFilters>();
+    const filters = useSelector((state: RootState) => state.carFilters);
     const { deleteCar, getAllCars } = useCarStorage(firebaseCarRepository);
     const { handleAsyncPress } = useAsyncPress();
     const { isOpen: isFilterOpen, toggle } = useFilterPanel();
@@ -33,14 +34,10 @@ export default function IndexScreen() {
             .finally(() => setIsLoading(false));
     }, [filters]);
 
-    const handleSubmitClick = (filters: CarFilters) => {
-        setFilters(filters);
-    }
-
     return (
         <LoadingWrapper isLoading={isLoading}>
             <View style={{ flex: 1, backgroundColor: colors.background }}>
-                <CarFilterComponent isOpen={isFilterOpen} onSubmitClick={handleSubmitClick} initialFilters={filters}/>
+                <CarFilterComponent isOpen={isFilterOpen} />
                 <ScrollView style={{ paddingTop: 10 }}>
                     {cars.map(car => (
                         <CarCard

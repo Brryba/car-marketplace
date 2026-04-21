@@ -11,21 +11,12 @@ import {useCarMakes} from "@/hooks/api/useCarMakes";
 import {useCarModels} from "@/hooks/api/useCarModels";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import {Colors} from "@/constants/theme";
-
-export const EMPTY_FILTERS: CarFilters = {
-    make: undefined,
-    model: undefined,
-    yearFrom: undefined,
-    yearTo: undefined,
-    city: undefined,
-    sortBy: undefined,
-    sortOrder: undefined,
-};
+import {useDispatch, useSelector} from "react-redux";
+import { setCarFilters, resetFilters } from "@/store/slices/filtersSlice"
+import { RootState } from "@/store/store";
 
 interface CarFilterComponentProps {
     isOpen: boolean;
-    onSubmitClick: (filters: CarFilters) => void;
-    initialFilters?: CarFilters;
 }
 
 interface SortOption {
@@ -34,10 +25,12 @@ interface SortOption {
     sortOrder: SortDirection;
 }
 
-export default function CarFilterComponent({ isOpen, onSubmitClick, initialFilters }: CarFilterComponentProps) {
+export default function CarFilterComponent({ isOpen }: CarFilterComponentProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
-    const [filters, setFilters] = useState<CarFilters>(initialFilters ?? EMPTY_FILTERS);
+    const dispatch = useDispatch();
+    const initialFilters = useSelector((state: RootState) => state.carFilters);
+    const [filters, setFilters] = useState<CarFilters>(initialFilters);
     const {data: makes, isLoading: makesLoading, isError: makesError} = useCarMakes();
     const {data: models, isLoading: modelsLoading, isError: modelsError} = useCarModels(filters.make);
 
@@ -67,11 +60,10 @@ export default function CarFilterComponent({ isOpen, onSubmitClick, initialFilte
         o => o.sortBy === filters.sortBy && o.sortOrder === filters.sortOrder
     )?.label ?? tr.filter.sorting.noSorting;
 
-    const handleSave = () => onSubmitClick(filters);
+    const handleSave = () => dispatch(setCarFilters(filters));
 
     const handleReset = () => {
-        setFilters(EMPTY_FILTERS);
-        onSubmitClick(EMPTY_FILTERS);
+        dispatch(resetFilters());
     };
 
     const s = styles(colors);
