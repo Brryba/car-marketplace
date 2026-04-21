@@ -1,24 +1,55 @@
 import { NoInternetBanner } from "@/components/ui/NoInternetBanner";
 import { useTheme } from "@/context/useTheme";
 import { useTranslations } from "@/context/useTranslations";
-import {Stack, useRootNavigationState, useRouter} from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as React from 'react';
+import { useState } from 'react';
 import { View } from "react-native";
-import { IconButton } from 'react-native-paper';
-import {RootState} from "@/store/store";
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import { IconButton, Menu } from 'react-native-paper';
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
+import { signOut } from 'firebase/auth';
+import { auth } from '@/db/firebase/fireBaseConfig';
+import {AuthGuard} from "@/components/AuthGuard";
 
-function AppHeader() {
+export default function AppHeader() {
     const { colors, activeTheme } = useTheme();
     const router = useRouter();
     const { tr } = useTranslations();
+    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+    const user = useSelector((state: RootState) => state.user.user);
+    const [menuVisible, setMenuVisible] = useState(false);
+
+    const UserIcon = () => (
+        <Menu
+            visible={menuVisible}
+            onDismiss={() => setMenuVisible(false)}
+            anchor={
+                <IconButton
+                    icon="account-circle"
+                    iconColor={colors.text}
+                    onPress={() => setMenuVisible(true)}
+                />
+            }
+        >
+            <Menu.Item title={user!.email} disabled />
+            <Menu.Item
+                title={'Later'}
+                onPress={() => {
+                    setMenuVisible(false);
+                    signOut(auth);
+                }}
+            />
+        </Menu>
+    )
 
     const RightHeader = () => (
         <View style={{ flexDirection: "row" }}>
             <IconButton icon="cog" iconColor={colors.text} onPress={() => router.push('/settings')} />
-            <IconButton icon="account-circle" iconColor={colors.text} />
+            {isLoggedIn ? (
+                <UserIcon />
+            ) : undefined}
         </View>
     );
 
@@ -45,6 +76,7 @@ function AppHeader() {
 
     return (
         <>
+            <AuthGuard />
             <StatusBar style={activeTheme === 'dark' ? 'light' : 'dark'} />
             <Stack
                 screenOptions={{
@@ -69,5 +101,3 @@ function AppHeader() {
         </>
     );
 }
-
-export default AppHeader;

@@ -6,7 +6,7 @@ const en: TranslationType = {
     settings: "Settings",
     create: "Create",
     edit: "Edit",
-    auth: "Login into application"
+    user: "Login into application"
   },
   settings: {
     themeLabel: "Theme",

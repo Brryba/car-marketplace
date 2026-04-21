@@ -6,7 +6,7 @@ const ru: TranslationType = {
     settings: "Настройки",
     create: "Добавить",
     edit: "Изменить",
-    auth: 'Вход в приложение'
+    user: 'Вход в приложение'
   },
   settings: {
     themeLabel: "Тема",
