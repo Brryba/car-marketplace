@@ -18,12 +18,14 @@ import {db} from "@/db/firebase/fireBaseConfig";
 import {CarFilters} from "@/types/car-filters";
 import Fuse from "fuse.js";
 import {uploadPhotoToCloudinary} from "@/api/cloudinary.api";
+import {getAuth} from "@firebase/auth";
 
 const COLLECTION = 'cars';
 
 export const firebaseCarRepository: ICarRepository = {
     async saveCar(car: CarFormData): Promise<void> {
         const id = uuid.v4() as string;
+        const userId = getAuth().currentUser?.uid;
 
         let photoUrl = '';
         if (car.photo) {
@@ -31,7 +33,7 @@ export const firebaseCarRepository: ICarRepository = {
         }
 
         const ref = doc(collection(db, COLLECTION), id);
-        await setDoc(ref, { ...car, photo: photoUrl, id, createdAt: Date.now() });
+        await setDoc(ref, { ...car, photo: photoUrl, id, userId, createdAt: Date.now() });
     },
 
     async editCar(id: string, car: CarEntity): Promise<void> {

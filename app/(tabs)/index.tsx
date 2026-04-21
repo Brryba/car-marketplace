@@ -32,7 +32,7 @@ export default function IndexScreen() {
         getAllCars(filters)
             .then(setCars)
             .finally(() => setIsLoading(false));
-    }, [filters]);
+    }, [filters, getAllCars]);
 
     return (
         <LoadingWrapper isLoading={isLoading}>

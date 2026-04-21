@@ -6,6 +6,8 @@ import * as React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import EmptyPhoto from "@/components/ui/EmptyPhoto";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store/store";
 
 export interface CarCardProps {
     car: CarEntity;
@@ -17,6 +19,7 @@ export default function CarCard({
 }: CarCardProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
+    const { user } = useSelector((state: RootState) => state.user);
 
     const params = [
         { label: tr.car.transmission, value: tr.transmission[car.transmission] },
@@ -84,7 +87,7 @@ export default function CarCard({
                                 </Text>
                             </View>
                         ) : null}
-                        {actions ? (
+                        {actions && user?.id === car.userId ? (
                             <View style={styles.actions}>{actions}</View>
                         ) : null}
                     </View>

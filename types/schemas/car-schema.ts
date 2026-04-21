@@ -32,6 +32,7 @@ export function useCarSchema() {
 
     const carEntitySchema = carSchema.extend({
         id: z.string(),
+        userId: z.string(),
         createdAt: z.string(),
         ownerId: z.string(),
     });
