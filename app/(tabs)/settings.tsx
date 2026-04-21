@@ -1,11 +1,13 @@
-import { SettingsPicker } from "@/components/ui/SettingsPicker";
-import { useTheme } from "@/context/useTheme";
-import { LOCALE_PREFERENCES, THEME_PREFERENCES } from "@/types/global-types";
-import { ScrollView } from 'react-native';
-import { Divider } from "react-native-paper";
-import { useTranslations } from "@/context/useTranslations";
-import { useQueryClient } from "@tanstack/react-query";
-import {SettingsButton} from "@/components/ui/SettingsButton";
+import {SettingsPicker} from "@/components/ui/settings/SettingsPicker";
+import {useTheme} from "@/context/useTheme";
+import {LOCALE_PREFERENCES, THEME_PREFERENCES} from "@/types/global-types";
+import {ScrollView} from 'react-native';
+import {Divider} from "react-native-paper";
+import {useTranslations} from "@/context/useTranslations";
+import {useQueryClient} from "@tanstack/react-query";
+import {SettingsButton} from "@/components/ui/settings/SettingsButton";
+import {SettingsCalendarButton} from "@/components/ui/settings/SettingsCalendarButton";
+import {scheduledNotificationService} from "@/services/notificationService";
 
 export default function SettingsScreen() {
     const { colors } = useTheme();
@@ -35,7 +37,16 @@ export default function SettingsScreen() {
                 name={tr.settings.clearCache}
                 onPress={() => queryClient.invalidateQueries()}
             />
-            <Divider />
+            <Divider/>
+            <SettingsCalendarButton name={tr.settings.sendNotificationIn} onPress={(date) => {
+                scheduledNotificationService.scheduleNotifications(date, tr.notifications.title, tr.notifications.body);
+            }}/>
+            <Divider/>
+            <SettingsButton
+                name={tr.settings.clearNotifications}
+                onPress={() => scheduledNotificationService.cancelAllNotifications()}
+            />
+            <Divider/>
         </ScrollView>
     );
 }

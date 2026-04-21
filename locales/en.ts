@@ -1,4 +1,4 @@
-import type { TranslationType } from '@/types/translation-type';
+import type { TranslationType } from '@/locales/translation-type';
 
 const en: TranslationType = {
   headers: {
@@ -20,7 +20,9 @@ const en: TranslationType = {
       en: "English",
       system: "System"
     },
-    clearCache: 'Clear cache'
+    clearCache: 'Clear cache',
+    sendNotificationIn: 'Send daily notification in',
+    clearNotifications: 'Cancel all notifications',
   },
   filter: {
     labels: {
@@ -108,6 +110,10 @@ const en: TranslationType = {
     delete: 'Remove',
     save: 'Save',
     cancel: 'Cancel'
+  },
+  notifications: {
+    title: '🚗 Car Marketplace',
+    body: 'Don`t forget to check out our last listings!'
   },
   errors: {
     required: 'Field is required',

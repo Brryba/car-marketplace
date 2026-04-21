@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import {LocalePreference} from "@/types/global-types";
 import * as Localization from "expo-localization";
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
-import {TranslationType} from "@/types/translation-type";
+import {TranslationType} from "@/locales/translation-type";
 import {useLocaleStorage} from "@/hooks/local-storage/useLocaleStorage";
 
 interface LocaleContextType {

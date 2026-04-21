@@ -15,6 +15,8 @@ export interface TranslationType {
         clearCache: string;
         theme: Record<ThemePreference, string>;
         language: Record<LocalePreference, string>;
+        sendNotificationIn: string;
+        clearNotifications: string;
     };
     filter: {
         labels: {
@@ -55,6 +57,10 @@ export interface TranslationType {
         delete: string;
         cancel: string;
         save: string;
+    }
+    notifications: {
+        title: string;
+        body: string;
     }
     errors: {
         required: string;
