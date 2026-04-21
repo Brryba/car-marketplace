@@ -1,11 +1,14 @@
 import { NoInternetBanner } from "@/components/ui/NoInternetBanner";
 import { useTheme } from "@/context/useTheme";
 import { useTranslations } from "@/context/useTranslations";
-import { Stack, useRouter } from "expo-router";
+import {Stack, useRootNavigationState, useRouter} from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as React from 'react';
 import { View } from "react-native";
 import { IconButton } from 'react-native-paper';
+import {RootState} from "@/store/store";
+import {useSelector} from "react-redux";
+import {useEffect} from "react";
 
 function AppHeader() {
     const { colors, activeTheme } = useTheme();
@@ -61,6 +64,7 @@ function AppHeader() {
                 <Stack.Screen name="settings" options={{ title: tr.headers.settings, headerRight: () => null }} />
                 <Stack.Screen name="carCreate" options={{ title: tr.headers.create }} />
                 <Stack.Screen name="carChange" options={{ title: tr.headers.edit }} />
+                <Stack.Screen name="auth" options={{ title: tr.headers.auth, headerLeft: () => null, headerRight: () => null }} />
             </Stack>
         </>
     );

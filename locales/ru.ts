@@ -5,7 +5,8 @@ const ru: TranslationType = {
     index: "Автомобили",
     settings: "Настройки",
     create: "Добавить",
-    edit: "Изменить"
+    edit: "Изменить",
+    auth: 'Вход в приложение'
   },
   settings: {
     themeLabel: "Тема",

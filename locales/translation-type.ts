@@ -8,6 +8,7 @@ export interface TranslationType {
         settings: string;
         create: string;
         edit: string;
+        auth: string;
     };
     settings: {
         themeLabel: string;

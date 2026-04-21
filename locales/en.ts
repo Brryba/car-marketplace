@@ -5,7 +5,8 @@ const en: TranslationType = {
     index: "Cars",
     settings: "Settings",
     create: "Create",
-    edit: "Edit"
+    edit: "Edit",
+    auth: "Login into application"
   },
   settings: {
     themeLabel: "Theme",
