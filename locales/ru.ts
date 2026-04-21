@@ -6,7 +6,7 @@ const ru: TranslationType = {
     settings: "Настройки",
     create: "Добавить",
     edit: "Изменить",
-    user: 'Вход в приложение'
+    auth: 'Вход в приложение'
   },
   settings: {
     themeLabel: "Тема",
@@ -104,6 +104,7 @@ const ru: TranslationType = {
 
   helpers: {
     kms: "км",
+    logout: 'Выйти из аккаунта'
   },
   buttons: {
     create: 'Создать',

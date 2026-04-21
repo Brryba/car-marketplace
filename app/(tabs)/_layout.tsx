@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import {AuthGuard} from "@/components/AuthGuard";
+import {PaperProvider} from "react-native-paper";
 
 const queryClient = new QueryClient();
 
@@ -14,10 +15,12 @@ export default function RootLayout() {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 <LocaleProvider>
-                    <Provider store={store}>
-                        <AuthGuard />
-                        <AppHeader />
-                    </Provider>
+                    <PaperProvider>
+                        <Provider store={store}>
+                            <AuthGuard />
+                            <AppHeader />
+                        </Provider>
+                    </PaperProvider>
                 </LocaleProvider>
             </ThemeProvider>
         </QueryClientProvider>

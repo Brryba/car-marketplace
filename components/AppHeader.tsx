@@ -25,6 +25,7 @@ export default function AppHeader() {
         <Menu
             visible={menuVisible}
             onDismiss={() => setMenuVisible(false)}
+            contentStyle={{ marginTop: 48, marginRight: -16, backgroundColor: colors.header }}
             anchor={
                 <IconButton
                     icon="account-circle"
@@ -33,9 +34,10 @@ export default function AppHeader() {
                 />
             }
         >
-            <Menu.Item title={user!.email} disabled />
+            <Menu.Item title={user!.email} titleStyle={{ color: colors.text }} disabled />
             <Menu.Item
-                title={'Later'}
+                title={tr.helpers.logout}
+                titleStyle={{ color: colors.text }}
                 onPress={() => {
                     setMenuVisible(false);
                     signOut(auth);

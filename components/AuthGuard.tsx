@@ -31,7 +31,9 @@ export function AuthGuard() {
                     router.replace('/auth');
                 }
             } else {
-                router.replace('/');
+                if (pathname === '/auth') {
+                    router.replace('/');
+                }
             }
         }, 0);
         return () => clearTimeout(timeout);

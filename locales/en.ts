@@ -6,7 +6,7 @@ const en: TranslationType = {
     settings: "Settings",
     create: "Create",
     edit: "Edit",
-    user: "Login into application"
+    auth: "Login into application"
   },
   settings: {
     themeLabel: "Theme",
@@ -103,7 +103,8 @@ const en: TranslationType = {
   },
 
   helpers: {
-    kms: "km"
+    kms: "km",
+    logout: "Logout"
   },
   buttons: {
     create: 'Create',

@@ -51,6 +51,7 @@ export interface TranslationType {
     color: Record<ColorType, string>,
     helpers: {
         kms: string,
+        logout: string
     }
     buttons: {
         create: string;
