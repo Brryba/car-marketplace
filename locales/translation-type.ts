@@ -1,6 +1,6 @@
-import { CarFieldKey } from "@/types/schemas/car-schema";
-import { BodyType, ColorType, FuelType, TransmissionType } from "@/types/car-types";
-import { LocalePreference, ThemePreference } from "@/types/global-types";
+import {CarFieldKey} from "@/types/schemas/car-schema";
+import {BodyType, ColorType, FuelType, TransmissionType} from "@/types/car-types";
+import {LocalePreference, ThemePreference} from "@/types/global-types";
 
 export interface TranslationType {
     headers: {
@@ -63,6 +63,14 @@ export interface TranslationType {
         title: string;
         body: string;
     }
+    login: {
+        email: string;
+        password: string;
+        enterEmail: string;
+        enterPassword: string;
+        login: string;
+        register: string;
+    }
     errors: {
         required: string;
         invalidYear: string;
@@ -72,5 +80,13 @@ export interface TranslationType {
         number: string;
         loadFailed: string;
         noInternet: string;
+        firebase: {
+            invalidEmail: string;
+            userNotFound: string;
+            wrongPassword: string;
+            emailAlreadyInUse: string;
+            weakPassword: string;
+            networkError: string;
+        }
     }
 }

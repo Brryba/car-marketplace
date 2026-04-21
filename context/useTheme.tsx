@@ -1,5 +1,4 @@
 import { Colors } from '@/constants/theme';
-// Refresh types
 import { ResolvedTheme, ThemePreference } from "@/types/global-types";
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import { useColorScheme } from "react-native";

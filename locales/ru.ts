@@ -116,6 +116,14 @@ const ru: TranslationType = {
     title: '🚗 Car Marketplace',
     body: 'Не забудьте посмотреть новые объявления!'
   },
+  login: {
+    email: 'Email',
+    password: 'Пароль',
+    enterEmail: 'Введите email',
+    enterPassword: 'Введите пароль',
+    login: 'Войти',
+    register: 'Зарегистрироваться'
+  },
   errors: {
     required: 'Поле обязательно',
     invalidYear: 'Неверный год',
@@ -125,6 +133,14 @@ const ru: TranslationType = {
     number: 'Неверный формат числа',
     loadFailed: 'Ошибка загрузки. Пожалуйста, повторите попытку позже!',
     noInternet: 'Нет подключения к интернету',
+    firebase: {
+      invalidEmail: 'Неверный формат email',
+      userNotFound: 'Пользователь не существует',
+      wrongPassword: 'Неверный пароль',
+      emailAlreadyInUse: 'Пользователь с таким email уже существует',
+      weakPassword: 'Пароль должен быть не менее 6 символов',
+      networkError: 'Ошибка выполнения запроса'
+    }
   }
 };
 

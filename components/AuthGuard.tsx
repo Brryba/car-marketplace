@@ -13,6 +13,7 @@ export function AuthGuard() {
 
     useEffect(() => {
         return onAuthStateChanged(auth, (user) => {
+            console.log('auth state changed, user:', user?.uid);
             if (user) {
                 dispatch(setUserData({ id: user.uid, email: user.email! }));
             } else {
@@ -22,8 +23,13 @@ export function AuthGuard() {
     }, []);
 
     useEffect(() => {
+        console.log('isLoggedIn changed:', isLoggedIn);
         const timeout = setTimeout(() => {
-            if (!isLoggedIn) router.replace('/auth');
+            if (!isLoggedIn) {
+                router.replace('/auth');
+            } else {
+                router.replace('/');
+            }
         }, 0);
         return () => clearTimeout(timeout);
     }, [isLoggedIn]);

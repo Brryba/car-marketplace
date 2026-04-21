@@ -15,6 +15,8 @@ import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/store";
+import {signOut} from "@firebase/auth";
+import { auth } from '@/db/firebase/fireBaseConfig';
 
 export default function IndexScreen() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,6 +28,10 @@ export default function IndexScreen() {
     const { isOpen: isFilterOpen, toggle } = useFilterPanel();
     const router = useRouter();
     const [cars, setCars] = useState<CarEntity[]>([]);
+
+    // useEffect(() => {
+    //     signOut(auth);
+    // }, []);
 
     useEffect(() => {
         setIsLoading(true);

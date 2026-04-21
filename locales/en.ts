@@ -116,6 +116,14 @@ const en: TranslationType = {
     title: '🚗 Car Marketplace',
     body: 'Don`t forget to check out our last listings!'
   },
+  login: {
+    email: 'Email',
+    password: 'Password',
+    enterEmail: 'Enter email',
+    enterPassword: 'Enter password',
+    login: 'Login',
+    register: 'Register'
+  },
   errors: {
     required: 'Field is required',
     invalidYear: 'Year is invalid',
@@ -125,6 +133,14 @@ const en: TranslationType = {
     number: 'Invalid number format',
     loadFailed: 'Loading error. Please try again later',
     noInternet: 'No internet connection',
+    firebase: {
+      invalidEmail: 'Invalid email format',
+      userNotFound: 'User with email was not found',
+      wrongPassword: 'Invalid password',
+      emailAlreadyInUse: 'Email already in use',
+      weakPassword: 'Password must contain at least 6 symbols',
+      networkError: 'Network error'
+    }
   }
 };
 
