@@ -27,7 +27,7 @@ export default function CarChange() {
         getCar(id)
             .then(setCar)
             .finally(() => setIsLoading(false));
-    }, [id]);
+    }, [getCar, id]);
 
     return <LoadingWrapper isLoading={isLoading}>
         <View style={{ flex: 1, backgroundColor: colors.background }}>

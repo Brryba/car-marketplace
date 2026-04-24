@@ -72,6 +72,15 @@ export interface TranslationType {
         login: string;
         register: string;
     }
+    imagePicker: {
+        alert: {
+            title: string;
+            description: string;
+            camera: string;
+            gallery: string;
+            cancel: string;
+        }
+    }
     errors: {
         required: string;
         invalidYear: string;

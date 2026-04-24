@@ -125,6 +125,15 @@ const ru: TranslationType = {
     login: 'Войти',
     register: 'Зарегистрироваться'
   },
+  imagePicker: {
+    alert: {
+      title: 'Фото',
+      description: 'Выберите источник',
+      camera: 'Камера',
+      gallery: 'Галерея',
+      cancel: 'Отмена'
+    }
+  },
   errors: {
     required: 'Поле обязательно',
     invalidYear: 'Неверный год',

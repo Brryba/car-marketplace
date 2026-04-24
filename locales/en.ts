@@ -125,6 +125,15 @@ const en: TranslationType = {
     login: 'Login',
     register: 'Register'
   },
+  imagePicker: {
+    alert: {
+      title: 'Photo',
+      description: 'Select photo source',
+      camera: 'Camera',
+      gallery: 'Gallery',
+      cancel: 'Cancel'
+    }
+  },
   errors: {
     required: 'Field is required',
     invalidYear: 'Year is invalid',

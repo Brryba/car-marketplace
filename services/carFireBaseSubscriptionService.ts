@@ -1,8 +1,6 @@
 import {CarEntity} from "@/types/schemas/car-schema";
 import {collection, onSnapshot, orderBy, query, Query, where} from "firebase/firestore";
 import Fuse from "fuse.js";
-import {useSelector} from "react-redux";
-import {RootState} from "@/store/store";
 import {db} from "@/db/firebase/fireBaseConfig";
 import {CarFilters} from "@/types/car-filters";
 
