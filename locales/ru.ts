@@ -134,6 +134,13 @@ const ru: TranslationType = {
       cancel: 'Отмена'
     }
   },
+  share: {
+    divider: "━━━━━━━━━━━━━━━━━━━━",
+    price: "Цена",
+    photo: "Фото",
+    mileage: "Пробег",
+    location: "Локация",
+  },
   errors: {
     required: 'Поле обязательно',
     invalidYear: 'Неверный год',

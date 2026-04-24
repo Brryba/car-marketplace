@@ -134,6 +134,13 @@ const en: TranslationType = {
       cancel: 'Cancel'
     }
   },
+  share: {
+    divider: "━━━━━━━━━━━━━━━━━━━━",
+    price: 'Price',
+    photo: "Photo",
+    mileage: 'Mileage',
+    location: 'Location',
+  },
   errors: {
     required: 'Field is required',
     invalidYear: 'Year is invalid',

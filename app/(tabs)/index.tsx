@@ -12,6 +12,7 @@ import {useFilterPanel} from "@/hooks/useFilterPanel";
 import CarFilterComponent from "@/components/car-filter/CarFilterComponent";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 import {useCarSubscription} from "@/hooks/useCarSubscription";
+import {shareService} from "@/services/shareService";
 
 export default function IndexScreen() {
     const { colors } = useTheme();
@@ -52,6 +53,9 @@ export default function IndexScreen() {
                                         {tr.buttons.delete}
                                     </Button>
                                 </View>
+                            }
+                            onShare={
+                                (car) => {shareService.shareCarToTelegram(car)}
                             }
                         />
                     ))}

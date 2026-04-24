@@ -80,7 +80,14 @@ export interface TranslationType {
             gallery: string;
             cancel: string;
         }
-    }
+    },
+    share: {
+        divider: string;
+        price: string;
+        photo: string;
+        mileage: string;
+        location: string;
+    },
     errors: {
         required: string;
         invalidYear: string;

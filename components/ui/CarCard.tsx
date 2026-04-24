@@ -3,8 +3,8 @@ import { useTranslations } from "@/context/useTranslations";
 import { CarEntity } from "@/types/schemas/car-schema";
 import { Image } from "expo-image";
 import * as React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Card } from 'react-native-paper';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Card, IconButton } from 'react-native-paper';
 import EmptyPhoto from "@/components/ui/EmptyPhoto";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/store";
@@ -12,11 +12,12 @@ import {RootState} from "@/store/store";
 export interface CarCardProps {
     car: CarEntity;
     actions?: React.ReactNode;
+    onShare: (entity: CarEntity) => void;
 }
 
 export default function CarCard({
-    car, actions
-}: CarCardProps) {
+                                    car, actions, onShare
+                                }: CarCardProps) {
     const { colors } = useTheme();
     const { tr } = useTranslations();
     const { user } = useSelector((state: RootState) => state.user);
@@ -32,21 +33,30 @@ export default function CarCard({
     return (
         <Card style={[styles.card, { backgroundColor: colors.content, marginBottom: 20 }]} elevation={2}>
             <View>
-                {car.photo ? (
-                    <Image source={{ uri: car.photo }} style={{ width: '100%', aspectRatio: 16 / 9 }} />
-                ) : (
-                    <EmptyPhoto/>
-                )}
+                <View>
+                    {car.photo ? (
+                        <Image source={{ uri: car.photo }} style={{ width: '100%', aspectRatio: 16 / 9 }} />
+                    ) : (
+                        <EmptyPhoto/>
+                    )}
+                    <TouchableOpacity
+                        style={[styles.shareButton, { backgroundColor: colors.content }]}
+                        onPress={() => {onShare(car)}}
+                        activeOpacity={0.8}
+                    >
+                        <IconButton icon="share-variant" size={18} iconColor={colors.text} style={{ margin: 0 }} />
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={[styles.name, { color: colors.text }]}
-                                numberOfLines={1}>
+                                  numberOfLines={1}>
                                 {car.make} {car.model} {car.releaseYear}
                             </Text>
                             <Text style={[styles.name, { color: colors.accent, fontSize: 18 }]}
-                                numberOfLines={1}>
+                                  numberOfLines={1}>
                                 {car.price} $
                             </Text>
                         </View>
@@ -134,5 +144,20 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         gap: 8,
         marginTop: 4,
+    },
+    shareButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
     },
 });
