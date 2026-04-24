@@ -6,7 +6,7 @@ import LoadingWrapper from "@/components/ui/LoadingWrapper";
 import {useEffect, useState} from "react";
 import {useTranslations} from "@/context/useTranslations";
 import {useLocalSearchParams, useRouter} from "expo-router";
-import {useCarStorage} from "@/hooks/local-storage/useCarStorage";
+import {useCarStorage} from "@/hooks/useCarStorage";
 import {CarEntity} from "@/types/schemas/car-schema";
 import {useAsyncPress} from "@/hooks/useAsyncPress";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";

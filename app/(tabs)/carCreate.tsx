@@ -3,7 +3,7 @@ import { useTheme } from "@/context/useTheme";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 import {useTranslations} from "@/context/useTranslations";
-import {useCarStorage} from "@/hooks/local-storage/useCarStorage";
+import {useCarStorage} from "@/hooks/useCarStorage";
 import {useRouter} from "expo-router";
 import {firebaseCarRepository} from "@/db/firebase/car-firebase-repository";
 import LoadingWrapper from "@/components/ui/LoadingWrapper";
